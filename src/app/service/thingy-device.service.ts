@@ -22,4 +22,12 @@ export class ThingyDeviceService {
     return this.httpClient.get(this.basicURI + '/' + id);
   }
 
+  public updateThingDevice(thingyDeviceModel: ThingyDeviceModel) {
+    return this.httpClient.put(this.basicURI + '/' + thingyDeviceModel.id, thingyDeviceModel);
+  }
+
+  public deleteThingyDeviceById(id: string) {
+    return this.httpClient.delete(this.basicURI + '/' + id);
+  }
+
 }

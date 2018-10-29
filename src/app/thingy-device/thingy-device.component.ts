@@ -45,5 +45,4 @@ export class ThingyDeviceComponent implements OnInit {
     });
     editThingyDeviceModalRef.componentInstance.id = id;
   }
-
 }

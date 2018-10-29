@@ -24,6 +24,7 @@
       <th>Location</th>
       <th>Device id</th>
       <th>Edit</th>
+      <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -33,7 +34,13 @@
       <td>
         <button type="button" (click)="openEditThingyDeviceModal(thingyDevice.id)" class="btn btn-outline-primary btn-sm">
           <i class="fa fa-edit"></i>
-          <span>Edit</span>
+          <span> Edit</span>
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-danger btn-sm">
+          <i class="fa fa-trash"></i>
+          <span> Delete</span>
         </button>
       </td>
       <td>

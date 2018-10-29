@@ -57,4 +57,17 @@ export class EditThingyDeviceComponent implements OnInit {
     });
   }
 
+  updateThingyDevice() {
+    const thingyDeviceModel: ThingyDeviceModel = new ThingyDeviceModel();
+    const data = this.form.value;
+    thingyDeviceModel.deviceId = data.deviceId;
+    thingyDeviceModel.id = this.id;
+    this.thingyDeviceService.updateThingDevice(thingyDeviceModel).subscribe(() => {
+      this.activeModal.close('');
+      this.reloadData.emit();
+    }, error => {
+      console.log('ERROR = ', error);
+    });
+  }
+
 }
