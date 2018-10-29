@@ -45,4 +45,17 @@ export class ThingyDeviceComponent implements OnInit {
     });
     editThingyDeviceModalRef.componentInstance.id = id;
   }
+
+  deleteThingyDevice(id: string) {
+    const question = 'Are you sure you want to delete this thingy device?';
+    if (confirm(question)) {
+      this.thingyDeviceService.deleteThingyDeviceById(id).subscribe(() => {
+        this.loadThingyDevicesData();
+      }, error => {
+        this.loadThingyDevicesData();
+        console.log(error);
+      });
+    }
+  }
+
 }
