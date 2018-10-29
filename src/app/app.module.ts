@@ -21,6 +21,7 @@ import {MqttBrokerConnectionService} from './service/mqtt-broker-connection.serv
 import {ThingyDeviceService} from './service/thingy-device.service';
 import { ThingyDeviceComponent } from './thingy-device/thingy-device.component';
 import {ConfigureThingyDeviceComponent} from './thingy-device/configure-thingy-device/configure-thingy-device.component';
+import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/edit-thingy-device.component';
 
 
 @NgModule({
@@ -33,12 +34,14 @@ import {ConfigureThingyDeviceComponent} from './thingy-device/configure-thingy-d
     HomeComponent,
     MqttBrokerConnectionComponent,
     ThingyDeviceComponent,
-    ConfigureThingyDeviceComponent
+    ConfigureThingyDeviceComponent,
+    EditThingyDeviceComponent
   ],
   entryComponents: [
     SignUpComponent,
     LoginComponent,
-    ConfigureThingyDeviceComponent
+    ConfigureThingyDeviceComponent,
+    EditThingyDeviceComponent
   ],
   imports: [
     BrowserModule,

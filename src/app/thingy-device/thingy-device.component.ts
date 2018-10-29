@@ -3,6 +3,7 @@ import {ThingyDeviceService} from '../service/thingy-device.service';
 import {ThingyDeviceModel} from '../model/thingy-device.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ConfigureThingyDeviceComponent} from './configure-thingy-device/configure-thingy-device.component';
+import {EditThingyDeviceComponent} from './edit-thingy-device/edit-thingy-device.component';
 
 @Component({
   selector: 'app-thingy-device',
@@ -30,11 +31,19 @@ export class ThingyDeviceComponent implements OnInit {
       });
   }
 
-  openModal() {
+  openConfigureThingyDeviceModal() {
     const configureNewThingyModalRef = this.modalService.open(ConfigureThingyDeviceComponent, {size: 'lg'});
     configureNewThingyModalRef.componentInstance.reloadTable.subscribe(() => {
       this.loadThingyDevicesData();
     });
+  }
+
+  openEditThingyDeviceModal(id: string) {
+    const editThingyDeviceModalRef = this.modalService.open(EditThingyDeviceComponent, {size: 'lg'});
+    editThingyDeviceModalRef.componentInstance.reloadData.subscribe(() => {
+      this.loadThingyDevicesData();
+    });
+    editThingyDeviceModalRef.componentInstance.id = id;
   }
 
 }

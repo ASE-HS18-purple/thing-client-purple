@@ -18,4 +18,8 @@ export class ThingyDeviceService {
     return this.httpClient.post(this.basicURI, thingyDevice);
   }
 
+  public findThingyDeviceById(id: string) {
+    return this.httpClient.get(this.basicURI + '/' + id);
+  }
+
 }
