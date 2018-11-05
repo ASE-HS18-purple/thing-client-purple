@@ -1,3 +1,20 @@
+# purple frontend
+
+Related repositories
+
+* [API](https://github.com/Clindbergh/thingy-api-purple)
+* [doc](https://github.com/Clindbergh/thingy-doc-purple)
+* [shared code with the frontend](https://github.com/Clindbergh/thingy-api-purple)
+
+## Getting Started
+
+```
+npm i
+npm run watch-server
+```
+
+
+
 # Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.4.

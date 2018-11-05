@@ -15,17 +15,12 @@ export class MqttBrokerConnectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.retrieveConnStateRepeatedly();
-  }
-
-  retrieveConnStateRepeatedly() {
-    setTimeout(this.retrieveConnState(), 1000);
+    this.retrieveConnState();
   }
 
   retrieveConnState() {
     this.service.retrieveState().subscribe((connection: MqttBrokerConnectionModel) => {
       this.connectionState = connection.state;
-      console.log('Connection state = ', connection);
       setTimeout(this.retrieveConnState(), 1000);
     });
   }

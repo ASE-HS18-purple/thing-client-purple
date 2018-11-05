@@ -18,6 +18,10 @@ import {JwtInterceptor} from './guard/JwtInterceptor';
 import {UnauthorizedRespInterceptor} from './guard/UnauthorizedRespInterceptor';
 import { MqttBrokerConnectionComponent } from './mqtt-broker-connection/mqtt-broker-connection.component';
 import {MqttBrokerConnectionService} from './service/mqtt-broker-connection.service';
+import {ThingyDeviceService} from './service/thingy-device.service';
+import { ThingyDeviceComponent } from './thingy-device/thingy-device.component';
+import {ConfigureThingyDeviceComponent} from './thingy-device/configure-thingy-device/configure-thingy-device.component';
+import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/edit-thingy-device.component';
 
 
 @NgModule({
@@ -29,10 +33,15 @@ import {MqttBrokerConnectionService} from './service/mqtt-broker-connection.serv
     WelcomeComponent,
     HomeComponent,
     MqttBrokerConnectionComponent,
+    ThingyDeviceComponent,
+    ConfigureThingyDeviceComponent,
+    EditThingyDeviceComponent
   ],
   entryComponents: [
     SignUpComponent,
     LoginComponent,
+    ConfigureThingyDeviceComponent,
+    EditThingyDeviceComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +58,7 @@ import {MqttBrokerConnectionService} from './service/mqtt-broker-connection.serv
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: UnauthorizedRespInterceptor, multi: true},
     MqttBrokerConnectionService,
+    ThingyDeviceService
   ],
   bootstrap: [AppComponent]
 })

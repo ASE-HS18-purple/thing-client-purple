@@ -4,10 +4,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
+import {ThingyDeviceComponent} from './thingy-device/thingy-device.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: '**', redirectTo: 'home'}
+  {path: 'thingy', component: ThingyDeviceComponent},
+  {path: '**', redirectTo: 'home'},
 ];
 
 @NgModule({
