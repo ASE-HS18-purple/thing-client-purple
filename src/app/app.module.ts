@@ -22,6 +22,7 @@ import {ThingyDeviceService} from './service/thingy-device.service';
 import { ThingyDeviceComponent } from './thingy-device/thingy-device.component';
 import {ConfigureThingyDeviceComponent} from './thingy-device/configure-thingy-device/configure-thingy-device.component';
 import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/edit-thingy-device.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/ed
     MqttBrokerConnectionComponent,
     ThingyDeviceComponent,
     ConfigureThingyDeviceComponent,
-    EditThingyDeviceComponent
+    EditThingyDeviceComponent,
+    StatisticsComponent
   ],
   entryComponents: [
     SignUpComponent,
