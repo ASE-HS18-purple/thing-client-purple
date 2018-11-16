@@ -6,7 +6,8 @@ import {StatisticsService} from '../service/statistics.service';
 export abstract class ChartJsComponent implements OnInit {
 
   chart: Chart;
-
+  public fromDate: Date;
+  public toDate: Date;
 
   protected constructor(public statisticsService: StatisticsService, public property: string, public chartId: string) {
   }
@@ -15,9 +16,7 @@ export abstract class ChartJsComponent implements OnInit {
   }
 
   initChartBuild() {
-    const midnight = new Date();
-    midnight.setHours(0, 0, 0, 0);
-    const currentTime = new Date();
+    this.setInitialDate();
     const temperatureChartData = this.getData();
     this.chart = this.buildChart(this.property, this.chartId, temperatureChartData);
   }
@@ -75,6 +74,28 @@ export abstract class ChartJsComponent implements OnInit {
     return color;
   }
 
+  setInitialDate() {
+    this.fromDate = new Date();
+    this.fromDate.setHours(0, 0, 0);
+    this.toDate = new Date();
+  }
+
   abstract getData(): ChartModel;
+
+  getFromDate() {
+    return this.fromDate;
+  }
+
+  getToDate() {
+    return this.toDate;
+  }
+
+  handleFromDate(fromDate) {
+    this.fromDate = fromDate;
+  }
+
+  handleEndDate(toDate) {
+    this.toDate = toDate;
+  }
 
 }

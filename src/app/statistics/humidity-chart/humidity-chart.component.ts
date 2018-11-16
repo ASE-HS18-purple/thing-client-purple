@@ -19,7 +19,7 @@ export class HumidityChartComponent extends ChartJsComponent implements OnInit {
   }
 
   getData(): ChartModel {
-    return this.statisticsServices.getHumidityData(0, 0);
+    return this.statisticsServices.getHumidityData(super.getFromDate().getTime(), super.getToDate().getTime());
   }
 
 }

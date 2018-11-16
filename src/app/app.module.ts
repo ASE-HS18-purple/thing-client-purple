@@ -24,7 +24,6 @@ import {ConfigureThingyDeviceComponent} from './thingy-device/configure-thingy-d
 import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/edit-thingy-device.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { DatetimePickerComponent } from './datetime-picker/datetime-picker.component';
-import { DatePickerComponent } from './datetime-picker/date-picker/date-picker.component';
 import { TemperatureChartComponent } from './statistics/temperature-chart/temperature-chart.component';
 import { PressureChartComponent } from './statistics/pressure-chart/pressure-chart.component';
 import { HumidityChartComponent } from './statistics/humidity-chart/humidity-chart.component';
@@ -45,7 +44,6 @@ import { AirQualityChartComponent } from './statistics/air-quality-chart/air-qua
     EditThingyDeviceComponent,
     StatisticsComponent,
     DatetimePickerComponent,
-    DatePickerComponent,
     TemperatureChartComponent,
     PressureChartComponent,
     HumidityChartComponent,

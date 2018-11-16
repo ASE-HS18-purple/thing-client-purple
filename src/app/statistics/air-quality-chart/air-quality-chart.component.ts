@@ -19,7 +19,7 @@ export class AirQualityChartComponent extends ChartJsComponent implements OnInit
   }
 
   getData(): ChartModel {
-    return this.statisticsServices.getAirQualityData(0, 0);
+    return this.statisticsServices.getAirQualityData(super.getFromDate().getTime(), super.getToDate().getTime());
   }
 
 }
