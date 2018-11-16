@@ -2,12 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {Chart} from 'chart.js';
 import {ChartModel} from '../model/chart.model';
 import {StatisticsService} from '../service/statistics.service';
+import {from} from 'rxjs';
 
 export abstract class ChartJsComponent implements OnInit {
 
   chart: Chart;
+
   public fromDate: Date;
+  public fromTime: Date;
+
   public toDate: Date;
+  public toTime: Date;
 
   protected constructor(public statisticsService: StatisticsService, public property: string, public chartId: string) {
   }
@@ -77,7 +82,12 @@ export abstract class ChartJsComponent implements OnInit {
   setInitialDate() {
     this.fromDate = new Date();
     this.fromDate.setHours(0, 0, 0);
+
+    this.fromTime = new Date();
+    this.fromTime.setHours(0, 0, 0);
+
     this.toDate = new Date();
+    this.toTime = new Date();
   }
 
   abstract getData(): ChartModel;
@@ -92,10 +102,22 @@ export abstract class ChartJsComponent implements OnInit {
 
   handleFromDate(fromDate) {
     this.fromDate = fromDate;
+    console.log(this.property, ' Handled from date = ', this.fromDate);
   }
 
   handleEndDate(toDate) {
     this.toDate = toDate;
+    console.log(this.property, ' Handled to date = ', this.toDate);
+  }
+
+  handleFromTime(fromTime) {
+    this.fromTime = fromTime;
+    console.log(this.property, ' Handled from time = ', this.fromTime);
+  }
+
+  handleToTime(toTime) {
+    this.toTime = toTime;
+    console.log(this.property, ' Handled to time = ', this.toTime);
   }
 
 }

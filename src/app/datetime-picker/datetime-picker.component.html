@@ -1,13 +1,18 @@
-<form class="form-inline">
-  <div class="form-group">
-    <div class="input-group">
-      <input class="form-control" placeholder="yyyy-mm-dd"
-             name="dp" (dateSelect)="handleDate($event)" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker">
-      <div class="input-group-append">
-        <button class="btn btn-outline-primary" (click)="d.toggle()" type="button">
-          <i class="fa fa-calendar"></i>
-        </button>
+<div class="row">
+  <form class="form-inline">
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd"
+               name="dp" (dateSelect)="handleDate($event)" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary" (click)="d.toggle()" type="button">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </div>
       </div>
     </div>
+  </form>
+  <div class="col-4">
+    <ngb-timepicker (ngModelChange)="handleTime($event)" [(ngModel)]="time"></ngb-timepicker>
   </div>
-</form>
+</div>

@@ -5,10 +5,14 @@
   <hr/>
   <div class="row">
     <div class="col-5">
-      <app-datetime-picker [initialDate]="fromDate" (dateChanged)="handleFromDate($event)"></app-datetime-picker>
+      <app-datetime-picker [initialDate]="fromDate" [initialTime]="fromTime"
+                           (dateChanged)="handleFromDate($event)"
+                           (timeChanged)="handleFromTime($event)"></app-datetime-picker>
     </div>
     <div class="col-5">
-      <app-datetime-picker [initialDate]="toDate" (dateChanged)="handleEndDate($event)"></app-datetime-picker>
+      <app-datetime-picker [initialDate]="toDate" [initialTime]="toTime"
+                           (dateChanged)="handleEndDate($event)"
+                           (timeChanged)="handleToTime($event)"></app-datetime-picker>
     </div>
   </div>
   <hr/>
