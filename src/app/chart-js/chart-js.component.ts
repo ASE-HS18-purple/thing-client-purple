@@ -53,6 +53,12 @@ export abstract class ChartJsComponent implements OnInit {
         title: {
           display: true,
           text: label
+        },
+        scales: {
+          xAxes: {
+            type: 'time',
+            distribution: 'series'
+          }
         }
       }
     });
@@ -119,5 +125,4 @@ export abstract class ChartJsComponent implements OnInit {
     this.toTime = toTime;
     console.log(this.property, ' Handled to time = ', this.toTime);
   }
-
 }

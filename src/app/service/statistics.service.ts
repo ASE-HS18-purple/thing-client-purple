@@ -31,8 +31,8 @@ export class StatisticsService {
   private generateRandomData() {
     let i: number;
     const dataset = [];
-    for (i = 0; i < 5; i++) {
-      const value: number = Math.floor(Math.random() * 3) + 4;
+    for (i = 0; i < 25; i++) {
+      const value: number = Math.floor(Math.random() * 5) + 1;
       const date = (new Date().getTime()) - 1000000;
       dataset.push({value, date});
     }

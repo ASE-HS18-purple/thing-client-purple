@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Chart} from 'chart.js';
 import {StatisticsService} from '../service/statistics.service';
-import {ChartModel} from '../model/chart.model';
 
 @Component({
   selector: 'app-statistics',
