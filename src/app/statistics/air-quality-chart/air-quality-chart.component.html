@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="card">
+    <canvas style="width: 90%; height: 100%" id="airQualityChart"></canvas>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-5">
+      <app-datetime-picker (dateChanged)="handleStartDateTemp($event)"></app-datetime-picker>
+    </div>
+    <div class="col-5">
+      <app-datetime-picker></app-datetime-picker>
+    </div>
+  </div>
+  <hr/>
+</div>

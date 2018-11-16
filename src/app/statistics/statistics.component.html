@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
 
   <div class="row">
 
@@ -6,38 +6,8 @@
       <h3>Statistics</h3>
     </div>
   </div>
-
-  <table>
-    <tbody>
-    <tr>
-      <div class="row">
-        <td class="card">
-          <canvas style="width: 100%" id="temperatureChart"></canvas>
-        </td>
-      </div>
-    </tr>
-    <tr>
-      <div class="row">
-        <td class="card">
-          <canvas style="width: 100%" id="humidityChart"></canvas>
-        </td>
-      </div>
-    </tr>
-    <tr>
-      <div class="row">
-        <td class="card">
-          <canvas style="width: 100%" id="pressureChart"></canvas>
-        </td>
-      </div>
-    </tr>
-    <tr>
-      <div class="row">
-        <td class="card">
-          <canvas style="width: 100%" id="airQualityChart"></canvas>
-        </td>
-      </div>
-    </tr>
-    </tbody>
-  </table>
-
+  <app-temperature-chart></app-temperature-chart>
+  <app-pressure-chart></app-pressure-chart>
+  <app-humidity-chart></app-humidity-chart>
+  <app-air-quality-chart></app-air-quality-chart>
 </div>
