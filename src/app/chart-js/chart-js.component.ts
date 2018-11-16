@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ContentChild, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Chart} from 'chart.js';
 import {ChartModel} from '../model/chart.model';
 import {StatisticsService} from '../service/statistics.service';
 import {from} from 'rxjs';
+import {DatetimePickerComponent} from '../datetime-picker/datetime-picker.component';
 
 export abstract class ChartJsComponent implements OnInit {
 
@@ -13,6 +14,9 @@ export abstract class ChartJsComponent implements OnInit {
 
   public toDate: Date;
   public toTime: Date;
+
+  @ViewChildren(DatetimePickerComponent) dtPickerControls: QueryList<DatetimePickerComponent>;
+  disabledTimeControls = false;
 
   protected constructor(public statisticsService: StatisticsService, public property: string, public chartId: string) {
   }
@@ -98,6 +102,7 @@ export abstract class ChartJsComponent implements OnInit {
 
   abstract getData(): ChartModel;
 
+
   getFromDate() {
     return this.fromDate;
   }
@@ -108,21 +113,25 @@ export abstract class ChartJsComponent implements OnInit {
 
   handleFromDate(fromDate) {
     this.fromDate = fromDate;
-    console.log(this.property, ' Handled from date = ', this.fromDate);
   }
 
   handleEndDate(toDate) {
     this.toDate = toDate;
-    console.log(this.property, ' Handled to date = ', this.toDate);
   }
 
   handleFromTime(fromTime) {
     this.fromTime = fromTime;
-    console.log(this.property, ' Handled from time = ', this.fromTime);
   }
 
   handleToTime(toTime) {
     this.toTime = toTime;
-    console.log(this.property, ' Handled to time = ', this.toTime);
   }
+
+  toggleControls() {
+    this.disabledTimeControls = !this.disabledTimeControls;
+    this.dtPickerControls.forEach(control => {
+      control.disabled = this.disabledTimeControls;
+    });
+  }
+
 }

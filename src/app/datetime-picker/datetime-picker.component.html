@@ -13,6 +13,6 @@
     </div>
   </form>
   <div class="col-4">
-    <ngb-timepicker (ngModelChange)="handleTime($event)" [(ngModel)]="time"></ngb-timepicker>
+    <ngb-timepicker [disabled]="disabled" (ngModelChange)="handleTime($event)" [(ngModel)]="time"></ngb-timepicker>
   </div>
 </div>

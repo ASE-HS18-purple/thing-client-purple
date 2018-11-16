@@ -16,7 +16,7 @@ export class DatetimePickerComponent implements OnInit {
   @Input() initialDate: Date;
   @Input() initialTime: Date;
 
-  disabled = false;
+  @Input() disabled = false;
 
   constructor() {
   }
