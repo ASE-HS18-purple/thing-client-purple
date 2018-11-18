@@ -5,10 +5,12 @@ import {WelcomeComponent} from './welcome/welcome.component';
 import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import {ThingyDeviceComponent} from './thingy-device/thingy-device.component';
+import {StatisticsComponent} from './statistics/statistics.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'thingy', component: ThingyDeviceComponent},
+  {path: 'statistics', component: StatisticsComponent},
   {path: '**', redirectTo: 'home'},
 ];
 
