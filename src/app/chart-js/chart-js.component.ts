@@ -8,6 +8,7 @@ import {DatetimePickerComponent} from '../datetime-picker/datetime-picker.compon
 export abstract class ChartJsComponent implements OnInit {
 
   chart: Chart;
+  chartData: ChartModel;
 
   public fromDate: Date;
   public fromTime: Date;
@@ -26,21 +27,20 @@ export abstract class ChartJsComponent implements OnInit {
 
   initChartBuild() {
     this.setInitialDate();
-    const temperatureChartData = this.getData();
-    this.chart = this.buildChart(this.property, this.chartId, temperatureChartData);
+    this.getData();
   }
 
-  buildChart(label: string, chartId: string, chartData: ChartModel): Chart {
-    const labels: string[] = this.retrieveLabels(chartData);
+  buildChart(label: string, chartId: string): Chart {
+    const labels: string[] = this.retrieveLabels(this.chartData);
     let propertyValues: number[] = [];
     const propertyData: { label: string, data: number[], borderColor: string, fill: boolean }[] = [];
-    chartData.datasets.forEach(dataset => {
-      dataset.data.forEach(value => {
+    this.chartData.datasets.forEach(dataset => {
+      dataset.properties.forEach(value => {
         propertyValues.push(value.value);
       });
       const color: string = this.generateRandomColor();
       propertyData.push({
-        label: dataset.thingy,
+        label: dataset.thingyName,
         data: propertyValues,
         borderColor: color,
         fill: false
@@ -61,7 +61,11 @@ export abstract class ChartJsComponent implements OnInit {
         scales: {
           xAxes: {
             type: 'time',
-            distribution: 'series'
+            distribution: 'series',
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 20
+            }
           }
         }
       }
@@ -74,8 +78,8 @@ export abstract class ChartJsComponent implements OnInit {
   retrieveLabels(chart: ChartModel): string[] {
     const labels: string[] = [];
     if (chart.datasets[0]) {
-      chart.datasets[0].data.forEach(data => {
-        labels.push(new Date(data.value).toLocaleTimeString());
+      chart.datasets[0].properties.forEach(data => {
+        labels.push(new Date(data.value).getMonth() + '');
       });
     }
     return labels;

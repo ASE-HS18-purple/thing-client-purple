@@ -2,51 +2,32 @@ import {Injectable} from '@angular/core';
 import {ChartModel} from '../model/chart.model';
 import {checkAndUpdateDirectiveDynamic} from '../../../node_modules/@angular/core/src/view/provider';
 import {createForJitStub} from '../../../node_modules/@angular/compiler/src/aot/summary_serializer';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatisticsService {
 
-  constructor() {
+  private basicURI = 'http://localhost:3000/environmental-data';
+
+  constructor(public httpClient: HttpClient) {
   }
 
-  getTemperatureData(from: number, to: number): ChartModel {
-    return this.buildChartModel('Temperature');
+  getTemperatureData(from: number, to: number) {
+    return this.httpClient.get(this.basicURI + '/temperature?from=' + from + '&to=' + to);
   }
 
   getHumidityData(from: number, to: number) {
-    return this.buildChartModel('Humidity');
+    return this.httpClient.get(this.basicURI + '/humidity?from=' + from + '&to=' + to);
   }
 
   getPressureData(from: number, to: number) {
-    return this.buildChartModel('Pressure');
+    return this.httpClient.get(this.basicURI + '/pressure?from=' + from + '&to=' + to);
   }
 
   getAirQualityData(from: number, to: number) {
-    return this.buildChartModel('Air Quality');
+    return this.httpClient.get(this.basicURI + '/co2?from=' + from + '&to=' + to);
   }
-
-  // TODO: Delete this method after the real API is implemented.
-  private generateRandomData() {
-    let i: number;
-    const dataset = [];
-    for (i = 0; i < 25; i++) {
-      const value: number = Math.floor(Math.random() * 5) + 1;
-      const date = (new Date().getTime()) - 1000000;
-      dataset.push({value, date});
-    }
-    return dataset;
-  }
-
-  private buildChartModel(unit: string) {
-    const chartModel: ChartModel = new ChartModel();
-    chartModel.datasets = [];
-    chartModel.unit = 'Temperature';
-    chartModel.datasets.push({thingy: 'Thingy one', data: this.generateRandomData()});
-    chartModel.datasets.push({thingy: 'Thingy two', data: this.generateRandomData()});
-    return chartModel;
-  }
-
 
 }
