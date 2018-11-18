@@ -19,7 +19,14 @@ export class TemperatureChartComponent extends ChartJsComponent implements OnIni
   }
 
   getData(): ChartModel {
-    return this.statisticsService.getTemperatureData(super.getFromDate().getTime(), super.getToDate().getTime());
+    this.statisticsService
+      .getTemperatureData(super.getFromDate().getTime(), super.getToDate().getTime())
+      .subscribe((chartData: ChartModel) => {
+        console.log('CHART DATA = ', chartData);
+        this.chartData = chartData;
+        this.chart = this.buildChart(this.property, this.chartId);
+      });
+    return null;
   }
 
 

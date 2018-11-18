@@ -1,9 +1,11 @@
 export class ChartModel {
   unit: string;
-  datasets: { thingy: string, data: StatModel[] }[];
-}
-
-class StatModel {
-  value: number;
-  datetime: number;
+  datasets: {
+    id: string,
+    thingyName: string,
+    properties: {
+      value: number,
+      time: string;
+    }[]
+  }[];
 }

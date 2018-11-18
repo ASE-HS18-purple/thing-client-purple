@@ -19,7 +19,14 @@ export class PressureChartComponent extends ChartJsComponent implements OnInit {
   }
 
   getData(): ChartModel {
-    return this.statisticsServices.getPressureData(super.getFromDate().getTime(), super.getToDate().getTime());
+    this.statisticsService
+      .getPressureData(super.getFromDate().getTime(), super.getToDate().getTime())
+      .subscribe((chartData: ChartModel) => {
+        console.log('CHART DATA = ', chartData);
+        this.chartData = chartData;
+        this.chart = this.buildChart(this.property, this.chartId);
+      });
+    return null;
   }
 
 }
