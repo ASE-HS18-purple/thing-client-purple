@@ -15,7 +15,7 @@ export class HumidityChartComponent extends ChartJsComponent implements OnInit {
   }
 
   ngOnInit() {
-    super.initChartBuild();
+    super.initChartBuild(true);
   }
 
   getData(): ChartModel {

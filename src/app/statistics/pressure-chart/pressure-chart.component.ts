@@ -15,7 +15,7 @@ export class PressureChartComponent extends ChartJsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initChartBuild();
+    this.initChartBuild(true);
   }
 
   getData(): ChartModel {
