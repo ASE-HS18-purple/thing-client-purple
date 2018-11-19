@@ -15,7 +15,7 @@ export class TemperatureChartComponent extends ChartJsComponent implements OnIni
   }
 
   ngOnInit() {
-    super.initChartBuild();
+    super.initChartBuild(true);
   }
 
   getData(): ChartModel {

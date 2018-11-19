@@ -15,7 +15,7 @@ export class AirQualityChartComponent extends ChartJsComponent implements OnInit
   }
 
   ngOnInit() {
-    super.initChartBuild();
+    super.initChartBuild(true);
   }
 
   getData(): ChartModel {
