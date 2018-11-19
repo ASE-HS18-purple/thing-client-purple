@@ -4,6 +4,7 @@ import {ChartModel} from '../model/chart.model';
 import {StatisticsService} from '../service/statistics.service';
 import {from} from 'rxjs';
 import {DatetimePickerComponent} from '../datetime-picker/datetime-picker.component';
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 
 export abstract class ChartJsComponent implements OnInit {
 
@@ -25,8 +26,10 @@ export abstract class ChartJsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  initChartBuild() {
-    this.setInitialDate();
+  initChartBuild(keepCurrentTime: boolean) {
+    if (keepCurrentTime) {
+      this.setInitialDate();
+    }
     this.getData();
   }
 
@@ -79,7 +82,8 @@ export abstract class ChartJsComponent implements OnInit {
     const labels: string[] = [];
     if (chart.datasets[0]) {
       chart.datasets[0].properties.forEach(data => {
-        labels.push(new Date(data.value).getMonth() + '');
+        const date = new Date(data.time);
+        labels.push(date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getHours() + ':' + date.getMinutes());
       });
     }
     return labels;
@@ -108,27 +112,43 @@ export abstract class ChartJsComponent implements OnInit {
 
 
   getFromDate() {
-    return this.fromDate;
+    const fromDate = this.fromDate;
+    fromDate.setHours(this.fromTime.getHours(), this.fromTime.getMinutes(), this.fromTime.getSeconds());
+    return fromDate;
   }
 
   getToDate() {
-    return this.toDate;
+    const toDate = this.toDate;
+    toDate.setHours(this.toTime.getHours(), this.toTime.getMinutes(), this.toTime.getSeconds());
+    return toDate;
   }
 
-  handleFromDate(fromDate) {
-    this.fromDate = fromDate;
+  handleFromDate(fromDate: NgbDate) {
+    if (fromDate) {
+      this.fromDate.setFullYear(fromDate.year, fromDate.month, fromDate.day);
+      this.initChartBuild(false);
+    }
   }
 
   handleEndDate(toDate) {
-    this.toDate = toDate;
+    if (toDate) {
+      this.toDate.setFullYear(toDate.year, toDate.month, toDate.day);
+      this.initChartBuild(false);
+    }
   }
 
   handleFromTime(fromTime) {
-    this.fromTime = fromTime;
+    if (fromTime) {
+      this.fromTime.setHours(fromTime.hour, fromTime.minute, fromTime.second);
+      this.initChartBuild(false);
+    }
   }
 
   handleToTime(toTime) {
-    this.toTime = toTime;
+    if (toTime) {
+      this.toTime.setHours(toTime.hour, toTime.minute, toTime.second);
+      this.initChartBuild(false);
+    }
   }
 
   toggleControls() {
