@@ -19,6 +19,7 @@ import {UnauthorizedRespInterceptor} from './guard/UnauthorizedRespInterceptor';
 import { MqttBrokerConnectionComponent } from './mqtt-broker-connection/mqtt-broker-connection.component';
 import {MqttBrokerConnectionService} from './service/mqtt-broker-connection.service';
 import {ThingyDeviceService} from './service/thingy-device.service';
+import {ServerSocket} from './service/server-socket';
 import { ThingyDeviceComponent } from './thingy-device/thingy-device.component';
 import {ConfigureThingyDeviceComponent} from './thingy-device/configure-thingy-device/configure-thingy-device.component';
 import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/edit-thingy-device.component';
@@ -58,7 +59,8 @@ import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/ed
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: UnauthorizedRespInterceptor, multi: true},
     MqttBrokerConnectionService,
-    ThingyDeviceService
+    ThingyDeviceService,
+    ServerSocket
   ],
   bootstrap: [AppComponent]
 })

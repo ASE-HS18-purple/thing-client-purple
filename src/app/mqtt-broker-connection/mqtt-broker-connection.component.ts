@@ -1,28 +1,26 @@
-import {Component, OnInit} from '@angular/core';
+ import {Component, OnInit} from '@angular/core';
 import {MqttBrokerConnectionService} from '../service/mqtt-broker-connection.service';
 import {MqttBrokerConnectionModel} from '../model/mqtt-broker-connection.model';
+ import {Data, ServerSocket} from '../service/server-socket';
 
 @Component({
   selector: 'app-mqtt-broker-connection',
   templateUrl: './mqtt-broker-connection.component.html',
-  styleUrls: ['./mqtt-broker-connection.component.css']
+  styleUrls: ['./mqtt-broker-connection.component.css'],
+  providers: [ ServerSocket ]
 })
 export class MqttBrokerConnectionComponent implements OnInit {
 
   connectionState: string;
 
-  constructor(public service: MqttBrokerConnectionService) {
+  constructor(public service: ServerSocket) {
+    service.subject.subscribe(data => this.setConnectionState(<Data>data))
   }
 
-  ngOnInit() {
-    this.retrieveConnState();
-  }
+  ngOnInit(): void {}
 
-  retrieveConnState() {
-    this.service.retrieveState().subscribe((connection: MqttBrokerConnectionModel) => {
-      this.connectionState = connection.state;
-      setTimeout(this.retrieveConnState(), 1000);
-    });
+  setConnectionState(data: Data) {
+    console.log(data);
+      this.connectionState = data.connectionState;
   }
-
 }
