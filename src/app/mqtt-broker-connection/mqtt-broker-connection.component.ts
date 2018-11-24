@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MqttBrokerConnectionService} from '../service/mqtt-broker-connection.service';
 import {MqttBrokerConnectionModel} from '../model/mqtt-broker-connection.model';
+import {interval, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-mqtt-broker-connection',
@@ -11,17 +12,25 @@ export class MqttBrokerConnectionComponent implements OnInit {
 
   connectionState: string;
 
+  retrieveConnectionStateSub: Subscription;
+
+
   constructor(public service: MqttBrokerConnectionService) {
   }
 
   ngOnInit() {
-    this.retrieveConnState();
+    if (this.retrieveConnectionStateSub) {
+      this.retrieveConnectionStateSub.unsubscribe();
+    }
+    this.retrieveConnectionStateSub = interval(2500).subscribe(() => {
+      this.retrieveConnState();
+    });
   }
 
   retrieveConnState() {
     this.service.retrieveState().subscribe((connection: MqttBrokerConnectionModel) => {
       this.connectionState = connection.state;
-      setTimeout(this.retrieveConnState(), 1000);
+      console.log('CONNECTION STATE = ', this.connectionState);
     });
   }
 
