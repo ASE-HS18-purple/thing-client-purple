@@ -33,11 +33,12 @@ export class ChartsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initChartBuild(true);
+    this.initChartBuild(false);
   }
 
   initChartBuild(keepCurrentTime: boolean) {
-    if (keepCurrentTime) {
+    // In case I don't want to keep the already configured time, simply set it starting from the start of the current day.
+    if (!keepCurrentTime) {
       this.setInitialDate();
     }
     this.getData();
@@ -148,28 +149,28 @@ export class ChartsComponent implements OnInit {
   handleFromDate(fromDate: NgbDate) {
     if (fromDate) {
       this.fromDate.setFullYear(fromDate.year, fromDate.month, fromDate.day);
-      this.initChartBuild(false);
+      this.initChartBuild(true);
     }
   }
 
   handleEndDate(toDate) {
     if (toDate) {
       this.toDate.setFullYear(toDate.year, toDate.month, toDate.day);
-      this.initChartBuild(false);
+      this.initChartBuild(true);
     }
   }
 
   handleFromTime(fromTime) {
     if (fromTime) {
       this.fromTime.setHours(fromTime.hour, fromTime.minute, fromTime.second);
-      this.initChartBuild(false);
+      this.initChartBuild(true);
     }
   }
 
   handleToTime(toTime) {
     if (toTime) {
       this.toTime.setHours(toTime.hour, toTime.minute, toTime.second);
-      this.initChartBuild(false);
+      this.initChartBuild(true);
     }
   }
 
