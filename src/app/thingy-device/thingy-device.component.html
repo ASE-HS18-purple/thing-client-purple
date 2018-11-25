@@ -21,6 +21,7 @@
   <table class="table table-hover">
     <thead>
     <tr>
+      <th>Name</th>
       <th>Location</th>
       <th>Device id</th>
       <th>Edit</th>
@@ -29,6 +30,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let thingyDevice of thingyDevices">
+      <td>{{thingyDevice.name}}</td>
       <td>{{thingyDevice.location}}</td>
       <td>{{thingyDevice.deviceId}}</td>
       <td>

@@ -38,6 +38,10 @@ export class ConfigureThingyDeviceComponent implements OnInit {
         Validators.required,
         Validators.minLength(5),
       ]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+      ])
     });
   }
 
@@ -54,14 +58,18 @@ export class ConfigureThingyDeviceComponent implements OnInit {
       const formData = this.form.value;
       const thingyDevice: ThingyDeviceModel = new ThingyDeviceModel();
       thingyDevice.deviceId = formData.deviceId;
+      thingyDevice.name = formData.name;
       thingyDevice.location = formData.location;
-      this.thingyDeviceService.configureThingyDevice(thingyDevice).subscribe((response) => {
-        this.contactingServer = false;
-        this.activeModal.close('Close click');
-        this.reloadTable.emit();
-      }, error => {
-        this.error = true;
-        this.message = 'Error occurred when trying to configure the thingy device.';
+      this.thingyDeviceService.configureThingyDevice(thingyDevice).subscribe((response: ThingyDeviceModel) => {
+        if (response) {
+          this.contactingServer = false;
+          this.activeModal.close('Close click');
+          this.reloadTable.emit();
+        } else {
+          this.error = true;
+          this.message = 'Name or device id are not unique. They must be unique.';
+          this.contactingServer = false;
+        }
       });
     }
   }
