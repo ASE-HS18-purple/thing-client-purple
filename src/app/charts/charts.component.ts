@@ -45,12 +45,11 @@ export class ChartsComponent implements OnInit {
   }
 
   buildChart(label: string, chartId: string): Chart {
-    const labels: string[] = this.retrieveLabels(this.chartData);
-    let propertyValues: number[] = [];
-    const propertyData: { label: string, data: number[], borderColor: string, fill: boolean }[] = [];
+    let propertyValues: { x: Date, y: number }[] = [];
+    const propertyData: { label: string, data: { x: Date, y: number }[], borderColor: string, fill: boolean }[] = [];
     this.chartData.datasets.forEach(dataset => {
       dataset.properties.forEach(value => {
-        propertyValues.push(value.value);
+        propertyValues.push({x: new Date(value.time), y: value.value});
       });
       const color: string = this.generateRandomColor();
       propertyData.push({
@@ -64,40 +63,31 @@ export class ChartsComponent implements OnInit {
     return new Chart(chartId, {
       type: 'line',
       data: {
-        labels: labels,
         datasets: propertyData,
       },
+      showLine: true,
       options: {
+        elements: {
+          point: {
+            radius: 1,
+          }
+        },
         title: {
           display: true,
           text: label
         },
         scales: {
-          xAxes: {
+          xAxes: [{
             type: 'time',
-            distribution: 'series',
+            distribution: 'linear',
             ticks: {
               autoSkip: true,
-              maxTicksLimit: 20
-            }
-          }
+              maxTicksLimit: 20,
+            },
+          }]
         }
       }
     });
-  }
-
-  /**
-   * Just retrieve the times from the first dataset initially.
-   */
-  retrieveLabels(chart: ChartModel): string[] {
-    const labels: string[] = [];
-    if (chart.datasets[0]) {
-      chart.datasets[0].properties.forEach(data => {
-        const date = new Date(data.time);
-        labels.push(date.getDate() + '-' + (date.getMonth() + 1) + ' ' + date.getHours() + ':' + date.getMinutes());
-      });
-    }
-    return labels;
   }
 
   generateRandomColor() {
