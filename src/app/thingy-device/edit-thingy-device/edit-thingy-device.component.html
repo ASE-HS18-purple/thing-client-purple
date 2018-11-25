@@ -17,7 +17,27 @@
   <form [formGroup]="form">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
+        <div class="col">
+          <label for="name">Name</label>
+          <input class="form-control" id="name" name="name" formControlName="name" placeholder="name">
+          <div class="text-danger"
+               *ngIf="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)">
+            Name must be at least 5 characters long.
+          </div>
+        </div>
+        <div class="col">
+          <label for="location">Location</label>
+          <input class="form-control" id="location" name="location" formControlName="location" placeholder="location"
+                 required>
+          <div class="text-danger"
+               *ngIf="form.controls.location.invalid && (form.controls.location.dirty || form.controls.location.touched)">
+            Location must
+            be at least 3 characters
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
           <label for="deviceId">Device id</label>
           <input class="form-control" id="deviceId" name="deviceId" formControlName="deviceId" placeholder="deviceId">
           <div class="text-danger"
