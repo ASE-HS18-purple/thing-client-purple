@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {ThingyDeviceService} from '../service/thingy-device.service';
 import {ThingyDeviceModel} from '../model/thingy-device.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ConfigureThingyDeviceComponent} from './configure-thingy-device/configure-thingy-device.component';
 import {EditThingyDeviceComponent} from './edit-thingy-device/edit-thingy-device.component';
+import {TrafficLightComponent} from '../traffic-light/traffic-light.component';
+import {ServerSocket} from '../service/server-socket';
+import {ThingyDataEvent} from '../../../../backend/src/service/ThingyNotifyEvents';
 
 @Component({
   selector: 'app-thingy-device',
@@ -14,12 +17,35 @@ export class ThingyDeviceComponent implements OnInit {
 
   thingyDevices: ThingyDeviceModel[];
   contactingServer = false;
+  trafficLights: Map<string, TrafficLightComponent> = new Map();
+  @ViewChildren(TrafficLightComponent) trafficLightsQueryList: QueryList<TrafficLightComponent>;
 
-  constructor(public thingyDeviceService: ThingyDeviceService, private modalService: NgbModal) {
+  constructor(public thingyDeviceService: ThingyDeviceService, private modalService: NgbModal, private socket: ServerSocket) {
+    socket.subject.subscribe({next: this.updateThingyStatus.bind(this)});
+  }
+
+  updateThingyStatus(data) {
+    if (data.hasOwnProperty('thingyId')) {
+      let theLight = this.trafficLights.get((<ThingyDataEvent>data).thingyId);
+      if (theLight) {
+        theLight.update();
+      }
+    }
   }
 
   ngOnInit() {
     this.loadThingyDevicesData();
+  }
+
+  ngAfterViewInit() {
+    this.trafficLightsQueryList.changes.subscribe({
+      next: lights => {
+        lights.forEach((light, index) => {
+          this.trafficLights.set(this.thingyDevices[index].deviceId, light);
+          light.init();
+        });
+      }
+    })
   }
 
   loadThingyDevicesData() {

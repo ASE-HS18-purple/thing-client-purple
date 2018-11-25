@@ -23,6 +23,7 @@ import {ServerSocket} from './service/server-socket';
 import { ThingyDeviceComponent } from './thingy-device/thingy-device.component';
 import {ConfigureThingyDeviceComponent} from './thingy-device/configure-thingy-device/configure-thingy-device.component';
 import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/edit-thingy-device.component';
+import { TrafficLightComponent } from './traffic-light/traffic-light.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/ed
     MqttBrokerConnectionComponent,
     ThingyDeviceComponent,
     ConfigureThingyDeviceComponent,
-    EditThingyDeviceComponent
+    EditThingyDeviceComponent,
+    TrafficLightComponent
   ],
   entryComponents: [
     SignUpComponent,

@@ -20,7 +20,6 @@ export class MqttBrokerConnectionComponent implements OnInit {
   ngOnInit(): void {}
 
   setConnectionState(data: Data) {
-    console.log(data);
-      this.connectionState = data.connectionState;
+    this.connectionState = data.connectionState;
   }
 }
