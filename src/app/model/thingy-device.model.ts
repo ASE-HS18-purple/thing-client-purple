@@ -4,4 +4,5 @@ export class ThingyDeviceModel {
   id: string;
   location: string;
   lastUpdate: number;
+  properties: any[];
 }

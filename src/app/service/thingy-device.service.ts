@@ -14,6 +14,10 @@ export class ThingyDeviceService {
     return this.httpClient.get(this.basicURI);
   }
 
+  public getAllThingyDevicesWithLastUpdate() {
+    return this.httpClient.get(this.basicURI + '/withUpdates');
+  }
+
   public configureThingyDevice(thingyDevice: ThingyDeviceModel) {
     return this.httpClient.post(this.basicURI, thingyDevice);
   }
