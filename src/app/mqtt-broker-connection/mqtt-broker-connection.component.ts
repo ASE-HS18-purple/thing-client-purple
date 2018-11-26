@@ -1,37 +1,36 @@
 import {Component, OnInit} from '@angular/core';
-import {MqttBrokerConnectionService} from '../service/mqtt-broker-connection.service';
-import {MqttBrokerConnectionModel} from '../model/mqtt-broker-connection.model';
-import {interval, Subscription} from 'rxjs';
+import {ServerSocket} from '../service/server-socket';
+import {JSONProperty} from '../../../../backend/src/controllers/WebsocketController';
+
+enum MqttConnectionState {
+  Connected = "Connected",
+  Reconnecting = "Reconnecting",
+  Disconnected = "Disconnected",
+  Error = "Error"
+}
 
 @Component({
   selector: 'app-mqtt-broker-connection',
   templateUrl: './mqtt-broker-connection.component.html',
-  styleUrls: ['./mqtt-broker-connection.component.css']
+  styleUrls: ['./mqtt-broker-connection.component.css'],
+  providers: [ServerSocket]
 })
 export class MqttBrokerConnectionComponent implements OnInit {
 
-  connectionState: string;
+  connectionState: MqttConnectionState;
+  connectionStateEnum = MqttConnectionState;
 
-  retrieveConnectionStateSub: Subscription;
-
-
-  constructor(public service: MqttBrokerConnectionService) {
+  constructor(public service: ServerSocket) {
+    service.subject.subscribe(this.setConnectionState.bind(this));
+    this.connectionState = MqttConnectionState.Disconnected;
   }
 
-  ngOnInit() {
-    if (this.retrieveConnectionStateSub) {
-      this.retrieveConnectionStateSub.unsubscribe();
+  ngOnInit(): void {
+  }
+
+  setConnectionState(data: any) {
+    if (data.property == JSONProperty.MQTT) {
+      this.connectionState = data.mqttState;
     }
-    this.retrieveConnectionStateSub = interval(2500).subscribe(() => {
-      this.retrieveConnState();
-    });
   }
-
-  retrieveConnState() {
-    this.service.retrieveState().subscribe((connection: MqttBrokerConnectionModel) => {
-      this.connectionState = connection.state;
-      console.log('CONNECTION STATE = ', this.connectionState);
-    });
-  }
-
 }

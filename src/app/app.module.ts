@@ -19,12 +19,14 @@ import {UnauthorizedRespInterceptor} from './guard/UnauthorizedRespInterceptor';
 import { MqttBrokerConnectionComponent } from './mqtt-broker-connection/mqtt-broker-connection.component';
 import {MqttBrokerConnectionService} from './service/mqtt-broker-connection.service';
 import {ThingyDeviceService} from './service/thingy-device.service';
+import {ServerSocket} from './service/server-socket';
 import { ThingyDeviceComponent } from './thingy-device/thingy-device.component';
 import {ConfigureThingyDeviceComponent} from './thingy-device/configure-thingy-device/configure-thingy-device.component';
 import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/edit-thingy-device.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { DatetimePickerComponent } from './datetime-picker/datetime-picker.component';
 import { ChartsComponent } from './charts/charts.component';
+import { TrafficLightComponent } from './traffic-light/traffic-light.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { ChartsComponent } from './charts/charts.component';
     MqttBrokerConnectionComponent,
     ThingyDeviceComponent,
     ConfigureThingyDeviceComponent,
+    EditThingyDeviceComponent,
+    TrafficLightComponent,
     EditThingyDeviceComponent,
     StatisticsComponent,
     DatetimePickerComponent,
@@ -64,7 +68,8 @@ import { ChartsComponent } from './charts/charts.component';
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: UnauthorizedRespInterceptor, multi: true},
     MqttBrokerConnectionService,
-    ThingyDeviceService
+    ThingyDeviceService,
+    ServerSocket
   ],
   bootstrap: [AppComponent]
 })

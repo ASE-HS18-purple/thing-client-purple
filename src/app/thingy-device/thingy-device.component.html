@@ -24,6 +24,7 @@
       <th>Name</th>
       <th>Location</th>
       <th>Device id</th>
+      <th>Status</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
@@ -33,6 +34,7 @@
       <td>{{thingyDevice.name}}</td>
       <td>{{thingyDevice.location}}</td>
       <td>{{thingyDevice.deviceId}}</td>
+      <td><app-traffic-light></app-traffic-light></td>
       <td>
         <button type="button" (click)="openEditThingyDeviceModal(thingyDevice.id)" class="btn btn-outline-primary btn-sm">
           <i class="fa fa-edit"></i>
