@@ -37,8 +37,16 @@ export class EditThingyDeviceComponent implements OnInit {
       this.form = this.formBuilder.group({
         deviceId: new FormControl(res.deviceId, [
           Validators.required,
+          Validators.minLength(5),
+        ]),
+        name: new FormControl(res.name, [
+          Validators.required,
+          Validators.minLength(5),
+        ]),
+        location: new FormControl(res.location, [
+          Validators.required,
           Validators.minLength(3),
-        ])
+        ]),
       });
     }, error => {
       this.message = 'Failed to retrieve the latest version of thingy device';
@@ -52,22 +60,42 @@ export class EditThingyDeviceComponent implements OnInit {
     this.form = this.formBuilder.group({
       deviceId: new FormControl('', [
         Validators.required,
+        Validators.minLength(5),
+      ]),
+      location: new FormControl('', [
+        Validators.required,
         Validators.minLength(3),
+      ]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
       ])
     });
   }
 
   updateThingyDevice() {
-    const thingyDeviceModel: ThingyDeviceModel = new ThingyDeviceModel();
-    const data = this.form.value;
-    thingyDeviceModel.deviceId = data.deviceId;
-    thingyDeviceModel.id = this.id;
-    this.thingyDeviceService.updateThingDevice(thingyDeviceModel).subscribe(() => {
-      this.activeModal.close('');
-      this.reloadData.emit();
-    }, error => {
-      console.log('ERROR = ', error);
+    let validForm = true;
+    Object.keys(this.form.controls).forEach(controlName => {
+      const control = this.form.get(controlName);
+      if (!control.valid) {
+        validForm = false;
+      }
     });
+    if (validForm) {
+      const thingyDeviceModel: ThingyDeviceModel = new ThingyDeviceModel();
+      const data = this.form.value;
+      thingyDeviceModel.deviceId = data.deviceId;
+      thingyDeviceModel.location = data.location;
+      thingyDeviceModel.name = data.name;
+      thingyDeviceModel.id = this.id;
+      this.thingyDeviceService.updateThingDevice(thingyDeviceModel).subscribe(() => {
+        this.activeModal.close('');
+        this.reloadData.emit();
+      }, error => {
+        this.error = true;
+        this.message = 'The name and the device id must be unique!';
+      });
+    }
   }
 
 }

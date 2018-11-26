@@ -19,15 +19,14 @@ import {UnauthorizedRespInterceptor} from './guard/UnauthorizedRespInterceptor';
 import { MqttBrokerConnectionComponent } from './mqtt-broker-connection/mqtt-broker-connection.component';
 import {MqttBrokerConnectionService} from './service/mqtt-broker-connection.service';
 import {ThingyDeviceService} from './service/thingy-device.service';
+import {ServerSocket} from './service/server-socket';
 import { ThingyDeviceComponent } from './thingy-device/thingy-device.component';
 import {ConfigureThingyDeviceComponent} from './thingy-device/configure-thingy-device/configure-thingy-device.component';
 import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/edit-thingy-device.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { DatetimePickerComponent } from './datetime-picker/datetime-picker.component';
-import { TemperatureChartComponent } from './statistics/temperature-chart/temperature-chart.component';
-import { PressureChartComponent } from './statistics/pressure-chart/pressure-chart.component';
-import { HumidityChartComponent } from './statistics/humidity-chart/humidity-chart.component';
-import { AirQualityChartComponent } from './statistics/air-quality-chart/air-quality-chart.component';
+import { ChartsComponent } from './charts/charts.component';
+import { TrafficLightComponent } from './traffic-light/traffic-light.component';
 
 
 @NgModule({
@@ -42,12 +41,11 @@ import { AirQualityChartComponent } from './statistics/air-quality-chart/air-qua
     ThingyDeviceComponent,
     ConfigureThingyDeviceComponent,
     EditThingyDeviceComponent,
+    TrafficLightComponent,
+    EditThingyDeviceComponent,
     StatisticsComponent,
     DatetimePickerComponent,
-    TemperatureChartComponent,
-    PressureChartComponent,
-    HumidityChartComponent,
-    AirQualityChartComponent,
+    ChartsComponent,
   ],
   entryComponents: [
     SignUpComponent,
@@ -70,7 +68,8 @@ import { AirQualityChartComponent } from './statistics/air-quality-chart/air-qua
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: UnauthorizedRespInterceptor, multi: true},
     MqttBrokerConnectionService,
-    ThingyDeviceService
+    ThingyDeviceService,
+    ServerSocket
   ],
   bootstrap: [AppComponent]
 })

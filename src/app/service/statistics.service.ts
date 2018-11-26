@@ -30,4 +30,8 @@ export class StatisticsService {
     return this.httpClient.get(this.basicURI + '/co2?from=' + from + '&to=' + to);
   }
 
+  getData(property: string, from: number, to: number) {
+    return this.httpClient.get(this.basicURI + '/' + property + '?from=' + from + '&to=' + to);
+  }
+
 }

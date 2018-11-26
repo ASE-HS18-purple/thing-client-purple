@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card">
-    <canvas style="width: 50%; height: 50%" id="airQualityChart"></canvas>
+    <canvas id="{{canvasId}}"></canvas>
   </div>
   <hr/>
   <div class="row">
@@ -18,8 +18,8 @@
       <br>
       <br>
       <div class="custom-control custom-checkbox">
-        <input (change)="toggleControls()" type="checkbox" class="custom-control-input" id="customCheck4">
-        <label class="custom-control-label" for="customCheck4">Live data </label>
+        <input (change)="toggleControls()" type="checkbox" class="custom-control-input" id="{{checkBoxId}}">
+        <label class="custom-control-label" for="{{checkBoxId}}">Live data</label>
       </div>
     </div>
   </div>

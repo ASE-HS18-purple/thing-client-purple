@@ -1,5 +1,7 @@
 export class ThingyDeviceModel {
-  location: string;
+  name: string;
   deviceId: string;
   id: string;
+  location: string;
+  lastUpdate: number;
 }
