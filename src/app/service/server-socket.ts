@@ -4,13 +4,6 @@ import {Observable, Observer, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Authenticate} from '../authentication/authenticate';
 
-export interface Data {
-  timestamp: string,
-  property: string,
-  value: number,
-  connectionState: string
-}
-
 export enum WebSocketState {
   CONNECTING, CONNECTED, RECONNECTING, DISCONNECTED, ERROR
 }

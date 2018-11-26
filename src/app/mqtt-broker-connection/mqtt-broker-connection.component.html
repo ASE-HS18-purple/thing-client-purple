@@ -1,14 +1,6 @@
-<div class="container-fluid">
-  <div *ngIf="connectionState === 'Connected'">
-    <span class="badge badge-pill badge-primary">{{connectionState}} <i class="fa fa-plug"></i></span>
-  </div>
-  <div *ngIf="connectionState === 'Reconnecting'">
-    <span class="badge badge-pill badge-warning">{{connectionState}}</span>
-  </div>
-  <div *ngIf="connectionState === 'Disconnected'">
-    <span class="badge badge-pill badge-danger">{{connectionState}}</span>
-  </div>
-  <div *ngIf="connectionState === null">
-    <span class="badge badge-pill badge-secondary">Unkown</span>
-  </div>
+<div [ngSwitch]="connectionState" class="container-fluid">
+  <span *ngSwitchCase="'Connected'" class="badge badge-pill badge-primary">{{connectionState}} <i class="fa fa-plug"></i></span>
+  <span *ngSwitchCase="connectionStateEnum.Reconnecting" class="badge badge-pill badge-warning">{{connectionState}}</span>
+  <span *ngSwitchCase="connectionStateEnum.Disconnected" class="badge badge-pill badge-danger">{{connectionState}}</span>
+  <span *ngSwitchDefault class="badge badge-pill badge-secondary">Unkown</span>
 </div>
