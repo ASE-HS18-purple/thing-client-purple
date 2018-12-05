@@ -1,5 +1,6 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Timeouts} from 'selenium-webdriver';
+import {ViewRef_} from "../../../node_modules/@angular/core/src/view";
 
 enum TrafficLightStatus {
   GREEN = 'green', ORANGE = 'orange', RED = 'red', INACTIVE = 'inactive'
@@ -61,7 +62,9 @@ export class TrafficLightComponent implements OnInit {
       nextIn = currentValue.value[0] - difference;
       this.nextTimeout = setTimeout(this.updateStatus.bind(this), nextIn * 1000);
     }
-    this.cd.detectChanges();
+    if (this.cd && !(this.cd as ViewRef_).destroyed) {
+      this.cd.detectChanges();
+    }
   }
 
 }

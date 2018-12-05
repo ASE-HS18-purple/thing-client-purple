@@ -6,7 +6,7 @@ import {ConfigureThingyDeviceComponent} from './configure-thingy-device/configur
 import {EditThingyDeviceComponent} from './edit-thingy-device/edit-thingy-device.component';
 import {TrafficLightComponent} from '../traffic-light/traffic-light.component';
 import {ServerSocket} from '../service/server-socket';
-import {ThingyDataEvent} from '../../../../backend/src/service/ThingyNotifyEventDispatchers';
+import {ThingyDataEvent} from '../../../../thingy-api-purple/src/service/ThingyNotifyEventDispatchers';
 
 @Component({
   selector: 'app-thingy-device',
