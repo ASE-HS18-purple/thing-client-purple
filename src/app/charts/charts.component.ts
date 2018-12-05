@@ -191,9 +191,8 @@ export class ChartsComponent implements OnInit {
             if (dataset.properties && dataset.properties[0]) {
               const oldestProperty = dataset.properties[0];
               const now = new Date().getTime();
-              console.log(now - oldestProperty.time);
-              const twoMinutesInMillis = 2 * 60 * 1000;
-              if (now - oldestProperty.time > twoMinutesInMillis) {
+              const twoMinutesInMillis: number = 2 * 60 * 1000;
+              if (now - Number(oldestProperty.time) > twoMinutesInMillis) {
                 dataset.properties.splice(0, 1);
               }
             }
