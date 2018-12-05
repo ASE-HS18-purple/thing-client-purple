@@ -27,6 +27,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { DatetimePickerComponent } from './datetime-picker/datetime-picker.component';
 import { ChartsComponent } from './charts/charts.component';
 import { TrafficLightComponent } from './traffic-light/traffic-light.component';
+import { ThingyOverviewComponent } from './thingy-overview/thingy-overview.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { TrafficLightComponent } from './traffic-light/traffic-light.component';
     StatisticsComponent,
     DatetimePickerComponent,
     ChartsComponent,
+    ThingyOverviewComponent,
   ],
   entryComponents: [
     SignUpComponent,

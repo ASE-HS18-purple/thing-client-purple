@@ -2,7 +2,10 @@
   Greate you are now logged in!
 </p>
 TOKEN = {{currentUser.token}}
-<br />
+<br/>
 User name = {{currentUser.user.name}}
-<br />
+<br/>
 Name = {{currentUser.user.username}}
+<div *ngFor="let thingyDevice of thingyDevices">
+  <app-thingy-overview [thingyDevice]="thingyDevice"></app-thingy-overview>
+</div>

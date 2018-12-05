@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <div class="card">
+        <div class="card-header">
+          Temperature <i class="fa fa-thermometer-half"></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><i class="fa fa-location-arrow"></i> {{thingyDevice.location}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{thingyDevice.name}}</h6>
+          <p class="card-text">Last temperature: {{lastValue}}</p>
+          <p class="card-text">{{lastTime}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <div class="card-header">
+          Pressure <i class="fa fa-tachometer"></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><i class="fa fa-location-arrow"></i> {{thingyDevice.location}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{thingyDevice.name}}</h6>
+          <p class="card-text">Last pressure: {{lastValue}}</p>
+          <p class="card-text">{{lastTime}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="card">
+        <div class="card-header">
+          Humidity <i class="fa fa-tint"></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><i class="fa fa-location-arrow"></i> {{thingyDevice.location}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{thingyDevice.name}}</h6>
+          <p class="card-text">Last humidity: {{lastValue}}</p>
+          <p class="card-text">{{lastTime}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="card">
+        <div class="card-header">
+          CO2 <i class="fa fa-tachometer"></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><i class="fa fa-location-arrow"></i> {{thingyDevice.location}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{thingyDevice.name}}</h6>
+          <p class="card-text">Last Co2: {{lastValue}}</p>
+          <p class="card-text">{{lastTime}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr/>
+</div>
