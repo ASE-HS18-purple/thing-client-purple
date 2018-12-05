@@ -4,6 +4,7 @@ import {DatetimePickerComponent} from '../datetime-picker/datetime-picker.compon
 import {StatisticsService} from '../service/statistics.service';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import {Chart} from 'chart.js';
+import {JSONProperty} from "../../../../thingy-api-purple/src/controllers/WebsocketController";
 
 @Component({
   selector: 'app-charts',
@@ -28,6 +29,8 @@ export class ChartsComponent implements OnInit {
   @Input() canvasId: string;
   @Input() checkBoxId: string;
   @Input() property: string;
+
+  liveModeOn: boolean = false;
 
   constructor(public statisticsService: StatisticsService) {
   }
@@ -109,7 +112,7 @@ export class ChartsComponent implements OnInit {
     this.toTime = new Date();
   }
 
-  getData(): ChartModel {
+  getData() {
     this.statisticsService
       .getData(this.property.toLowerCase(), this.getFromDate().getTime(), this.getToDate().getTime())
       .subscribe((chartData: ChartModel) => {
@@ -120,7 +123,6 @@ export class ChartsComponent implements OnInit {
         this.chartData = chartData;
         this.chart = this.buildChart(this.property, this.canvasId);
       });
-    return null;
   }
 
 
@@ -169,6 +171,39 @@ export class ChartsComponent implements OnInit {
     this.dtPickerControls.forEach(control => {
       control.disabled = this.disabledTimeControls;
     });
+    this.liveModeOn = !this.liveModeOn;
+    this.chartData.datasets.forEach(dataset => {
+      dataset.properties = [];
+    });
+    this.chart.destroy();
+    if (this.liveModeOn) {
+    } else {
+      this.getData();
+    }
+    this.chart = this.buildChart(this.property, this.canvasId);
+  }
+
+  liveUpdateOfChart(data: any) {
+    if (this.liveModeOn && data.thingyId) {
+      this.chartData.datasets.forEach(dataset => {
+        if (dataset.id === data.thingyId) {
+          if (data.property === JSONProperty[this.property]) {
+            if (dataset.properties && dataset.properties[0]) {
+              const oldestProperty = dataset.properties[0];
+              const now = new Date().getTime();
+              console.log(now - oldestProperty.time);
+              const twoMinutesInMillis = 2 * 60 * 1000;
+              if (now - oldestProperty.time > twoMinutesInMillis) {
+                dataset.properties.splice(0, 1);
+              }
+            }
+            dataset.properties.push({value: data.value, time: data.timestamp});
+            this.chart.destroy();
+            this.chart = this.buildChart(this.property, this.canvasId);
+          }
+        }
+      });
+    }
   }
 
 }
