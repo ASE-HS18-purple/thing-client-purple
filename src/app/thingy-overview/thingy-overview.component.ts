@@ -22,21 +22,28 @@ export class ThingyOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.times = new ThingyOverViewTimes();
-    this.times.temperatureLastTime = moment(this.thingyDevice.lastTimes[JSONProperty.Temperature]).fromNow();
+    this.times.temperatureLastTime = this.thingyDevice.lastTimes[JSONProperty.Temperature] ?
+      moment(this.thingyDevice.lastTimes[JSONProperty.Temperature]).fromNow() : 'N/A';
     this.times.temperatureLastSeconds = this.thingyDevice.lastTimes[JSONProperty.Temperature];
-    this.times.pressureLastTime = moment(this.thingyDevice.lastTimes[JSONProperty.Pressure]).fromNow();
+    this.times.pressureLastTime = this.thingyDevice.lastTimes[JSONProperty.Pressure] ?
+      moment(this.thingyDevice.lastTimes[JSONProperty.Pressure]).fromNow() : 'N/A';
     this.times.pressureLastSeconds = this.thingyDevice.lastTimes[JSONProperty.Pressure];
-    this.times.humidityLastTime = moment(this.thingyDevice.lastTimes[JSONProperty.Humidity]).fromNow();
+    this.times.humidityLastTime = this.thingyDevice.lastTimes[JSONProperty.Humidity] ?
+      moment(this.thingyDevice.lastTimes[JSONProperty.Humidity]).fromNow() : 'N/A';
     this.times.humidityLastSeconds = this.thingyDevice.lastTimes[JSONProperty.Humidity];
-    this.times.co2LastTime = moment(this.thingyDevice.lastTimes[JSONProperty.CO2]).fromNow();
+    this.times.co2LastTime = this.thingyDevice.lastTimes[JSONProperty.CO2] ?
+      moment(this.thingyDevice.lastTimes[JSONProperty.CO2]).fromNow() : 'N/A';
     this.times.co2LastSeconds = this.thingyDevice.lastTimes[JSONProperty.CO2];
 
-    console.log(this.times.temperatureLastSeconds);
     this.values = new ThingyOverviewValues();
-    this.values.temperatureLastVal = this.thingyDevice.lastValues[JSONProperty.Temperature];
-    this.values.humidityLastVal = this.thingyDevice.lastValues[JSONProperty.Humidity];
-    this.values.pressureLastVal = this.thingyDevice.lastValues[JSONProperty.Pressure];
-    this.values.co2LastVal = this.thingyDevice.lastValues[JSONProperty.CO2];
+    this.values.temperatureLastVal = this.thingyDevice.lastValues[JSONProperty.Temperature] ?
+      this.thingyDevice.lastValues[JSONProperty.Temperature] : 'N/A';
+    this.values.humidityLastVal = this.thingyDevice.lastValues[JSONProperty.Humidity] ?
+      this.thingyDevice.lastValues[JSONProperty.Humidity]: 'N/A';
+    this.values.pressureLastVal = this.thingyDevice.lastValues[JSONProperty.Pressure] ?
+      this.thingyDevice.lastValues[JSONProperty.Pressure]: 'N/A';
+    this.values.co2LastVal = this.thingyDevice.lastValues[JSONProperty.CO2] ?
+      this.thingyDevice.lastValues[JSONProperty.CO2] : 'N/A';
     interval(5000).subscribe(() => {
       this.monitorTime();
     });
@@ -70,10 +77,14 @@ export class ThingyOverviewComponent implements OnInit {
   }
 
   monitorTime() {
-    this.times.temperatureLastTime = this.times.temperatureLastTime ? moment(this.times.temperatureLastSeconds).fromNow() : null;
-    this.times.humidityLastTime = this.times.humidityLastTime ? moment(this.times.humidityLastSeconds).fromNow() : null;
-    this.times.pressureLastTime = this.times.pressureLastTime ? moment(this.times.pressureLastSeconds).fromNow() : null;
-    this.times.co2LastTime = this.times.co2LastTime ? moment(this.times.co2LastSeconds).fromNow() : null;
+    this.times.temperatureLastTime = this.times.temperatureLastSeconds ?
+      moment(this.times.temperatureLastSeconds).fromNow() : 'N/A';
+    this.times.humidityLastTime = this.times.humidityLastSeconds ?
+      moment(this.times.humidityLastSeconds).fromNow() : 'N/A';
+    this.times.pressureLastTime = this.times.pressureLastSeconds ?
+      moment(this.times.pressureLastSeconds).fromNow() : 'N/A';
+    this.times.co2LastTime = this.times.co2LastSeconds ?
+      moment(this.times.co2LastSeconds).fromNow() : 'N/A';
 
   }
 
