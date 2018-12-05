@@ -22,6 +22,16 @@ export class ThingyOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.times = new ThingyOverViewTimes();
+    this.times.temperatureLastTime = moment(this.thingyDevice.lastTimes[JSONProperty.Temperature]).fromNow();
+    this.times.temperatureLastSeconds = this.thingyDevice.lastTimes[JSONProperty.Temperature];
+    this.times.pressureLastTime = moment(this.thingyDevice.lastTimes[JSONProperty.Pressure]).fromNow();
+    this.times.pressureLastSeconds = this.thingyDevice.lastTimes[JSONProperty.Pressure];
+    this.times.humidityLastTime = moment(this.thingyDevice.lastTimes[JSONProperty.Humidity]).fromNow();
+    this.times.humidityLastSeconds = this.thingyDevice.lastTimes[JSONProperty.Humidity];
+    this.times.co2LastTime = moment(this.thingyDevice.lastTimes[JSONProperty.CO2]).fromNow();
+    this.times.co2LastSeconds = this.thingyDevice.lastTimes[JSONProperty.CO2];
+
+    console.log(this.times.temperatureLastSeconds);
     this.values = new ThingyOverviewValues();
     this.values.temperatureLastVal = this.thingyDevice.lastValues[JSONProperty.Temperature];
     this.values.humidityLastVal = this.thingyDevice.lastValues[JSONProperty.Humidity];
