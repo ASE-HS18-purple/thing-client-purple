@@ -8,7 +8,7 @@
         <div class="card-body">
           <h5 class="card-title"><i class="fa fa-location-arrow"></i> {{thingyDevice.location}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{thingyDevice.name}}</h6>
-          <p class="card-text">Last temperature: {{lastValue}}</p>
+          <p class="card-text"><span style="font-size: 35px"> {{values.temperatureLastVal}}</span></p>
           <p class="card-text">{{lastTime}}</p>
         </div>
       </div>
@@ -21,7 +21,7 @@
         <div class="card-body">
           <h5 class="card-title"><i class="fa fa-location-arrow"></i> {{thingyDevice.location}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{thingyDevice.name}}</h6>
-          <p class="card-text">Last pressure: {{lastValue}}</p>
+          <p class="card-text"><span style="font-size: 35px">{{values.pressureLastVal}}</span></p>
           <p class="card-text">{{lastTime}}</p>
         </div>
       </div>
@@ -35,7 +35,7 @@
         <div class="card-body">
           <h5 class="card-title"><i class="fa fa-location-arrow"></i> {{thingyDevice.location}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{thingyDevice.name}}</h6>
-          <p class="card-text">Last humidity: {{lastValue}}</p>
+          <p class="card-text"><span style="font-size: 35px">{{values.humidityLastVal}}</span></p>
           <p class="card-text">{{lastTime}}</p>
         </div>
       </div>
@@ -49,7 +49,7 @@
         <div class="card-body">
           <h5 class="card-title"><i class="fa fa-location-arrow"></i> {{thingyDevice.location}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{thingyDevice.name}}</h6>
-          <p class="card-text">Last Co2: {{lastValue}}</p>
+          <p class="card-text"><span style="font-size: 35px">{{values.co2LastVal}}</span></p>
           <p class="card-text">{{lastTime}}</p>
         </div>
       </div>

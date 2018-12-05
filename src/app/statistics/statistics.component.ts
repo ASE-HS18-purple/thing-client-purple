@@ -20,7 +20,7 @@ export class StatisticsComponent implements OnInit {
   temperature = JSONProperty[JSONProperty.Temperature];
   pressure = JSONProperty[JSONProperty.Pressure];
 
-  constructor(public statisticsService: StatisticsService, public service: ServerSocket) {
+  constructor(public service: ServerSocket) {
     service.subject.subscribe({next: this.liveUpdateOfChart.bind(this)});
   }
 

@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {UserModel} from '../model/user.model';
 import {AuthModel} from '../model/auth.model';
 import {Authenticate} from '../authentication/authenticate';
 import {ThingyDeviceModel} from '../model/thingy-device.model';
 import {ThingyDeviceService} from '../service/thingy-device.service';
+import {ThingyOverviewComponent} from "../thingy-overview/thingy-overview.component";
+import {ServerSocket} from "../service/server-socket";
+import {ThingyDataEvent} from "../../../../thingy-api-purple/src/service/ThingyNotifyEventDispatchers";
 
 @Component({
   selector: 'app-home',
@@ -15,8 +18,13 @@ export class HomeComponent implements OnInit {
   private currentUser: AuthModel;
   private thingyDevices: ThingyDeviceModel[];
 
-  constructor(private authService: Authenticate, private thingyDeviceService: ThingyDeviceService) {
+  @ViewChildren(ThingyOverviewComponent) thingyOverviewComponents: QueryList<ThingyOverviewComponent>;
+
+  constructor(private authService: Authenticate,
+              private thingyDeviceService: ThingyDeviceService,
+              public serverSocket: ServerSocket) {
     this.currentUser = this.authService.currentUser();
+    serverSocket.subject.subscribe({next: this.updateThingyDevicesOverview.bind(this)});
   }
 
   ngOnInit() {
@@ -26,8 +34,17 @@ export class HomeComponent implements OnInit {
   loadThingyData() {
     this.thingyDeviceService.getAllThingyDevices().subscribe((thingyDevices: ThingyDeviceModel[]) => {
       this.thingyDevices = thingyDevices;
-      console.log(this.thingyDevices);
     });
+  }
+
+  updateThingyDevicesOverview(data: any) {
+    if (data && data.thingyId) {
+      this.thingyOverviewComponents.forEach((component: ThingyOverviewComponent) => {
+        if (component.thingyDevice.id == data.thingyId) {
+          component.updateThingyOverview(data);
+        }
+      });
+    }
   }
 
 }
