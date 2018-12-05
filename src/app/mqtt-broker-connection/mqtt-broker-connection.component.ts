@@ -29,7 +29,7 @@ export class MqttBrokerConnectionComponent implements OnInit {
   }
 
   setConnectionState(data: any) {
-    if (data.property == JSONProperty.MQTT) {
+    if (data.property == JSONProperty.Mqtt) {
       this.connectionState = data.mqttState;
     }
   }

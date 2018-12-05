@@ -1,4 +1,4 @@
-import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {ThingyDeviceService} from '../service/thingy-device.service';
 import {ThingyDeviceModel} from '../model/thingy-device.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -13,7 +13,7 @@ import {ThingyDataEvent} from '../../../../thingy-api-purple/src/service/ThingyN
   templateUrl: './thingy-device.component.html',
   styleUrls: ['./thingy-device.component.css']
 })
-export class ThingyDeviceComponent implements OnInit {
+export class ThingyDeviceComponent implements OnInit, AfterViewInit {
 
   thingyDevices: ThingyDeviceModel[];
   contactingServer = false;
@@ -26,7 +26,7 @@ export class ThingyDeviceComponent implements OnInit {
 
   updateThingyStatus(data) {
     if (data.hasOwnProperty('thingyId')) {
-      let theLight = this.trafficLights.get((<ThingyDataEvent>data).thingyId);
+      const theLight = this.trafficLights.get((<ThingyDataEvent>data).thingyId);
       if (theLight) {
         theLight.update();
       }
@@ -45,7 +45,7 @@ export class ThingyDeviceComponent implements OnInit {
           light.init();
         });
       }
-    })
+    });
   }
 
   loadThingyDevicesData() {
