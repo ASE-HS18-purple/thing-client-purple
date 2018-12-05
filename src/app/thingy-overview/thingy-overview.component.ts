@@ -23,6 +23,10 @@ export class ThingyOverviewComponent implements OnInit {
   ngOnInit() {
     this.times = new ThingyOverViewTimes();
     this.values = new ThingyOverviewValues();
+    this.values.temperatureLastVal = this.thingyDevice.lastValues[JSONProperty.Temperature];
+    this.values.humidityLastVal = this.thingyDevice.lastValues[JSONProperty.Humidity];
+    this.values.pressureLastVal = this.thingyDevice.lastValues[JSONProperty.Pressure];
+    this.values.co2LastVal = this.thingyDevice.lastValues[JSONProperty.CO2];
     interval(5000).subscribe(() => {
       this.monitorTime();
     });
