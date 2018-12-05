@@ -3,6 +3,7 @@ import {ThingyDeviceModel} from '../model/thingy-device.model';
 import {ThingyDataEvent} from '../../../../thingy-api-purple/src/service/ThingyNotifyEventDispatchers';
 import * as moment from 'moment';
 import {JSONProperty} from '../../../../thingy-api-purple/src/controllers/WebsocketController';
+import {interval} from "rxjs";
 
 @Component({
   selector: 'app-thingy-overview',
@@ -22,6 +23,9 @@ export class ThingyOverviewComponent implements OnInit {
   ngOnInit() {
     this.times = new ThingyOverViewTimes();
     this.values = new ThingyOverviewValues();
+    interval(5000).subscribe(() => {
+      this.monitorTime();
+    });
   }
 
   updateThingyOverview(data: any) {
@@ -29,18 +33,34 @@ export class ThingyOverviewComponent implements OnInit {
       switch (data.property) {
         case JSONProperty.Temperature:
           this.values.temperatureLastVal = data.value;
+          this.times.temperatureLastTime = moment(data.timestamp).fromNow();
+          this.times.temperatureLastSeconds = data.timestamp;
           break;
         case JSONProperty.Pressure:
           this.values.pressureLastVal = data.value;
+          this.times.pressureLastTime = moment(data.timestamp).fromNow();
+          this.times.pressureLastSeconds = data.timestamp;
           break;
         case JSONProperty.Humidity:
           this.values.humidityLastVal = data.value;
+          this.times.humidityLastTime = moment(data.timestamp).fromNow();
+          this.times.humidityLastSeconds = data.timestamp;
           break;
         case JSONProperty.CO2:
           this.values.co2LastVal = data.value;
+          this.times.co2LastTime = moment(data.timestamp).fromNow();
+          this.times.co2LastSeconds = data.timestamp;
           break;
       }
     }
+  }
+
+  monitorTime() {
+    this.times.temperatureLastTime = this.times.temperatureLastTime ? moment(this.times.temperatureLastSeconds).fromNow() : null;
+    this.times.humidityLastTime = this.times.humidityLastTime ? moment(this.times.humidityLastSeconds).fromNow() : null;
+    this.times.pressureLastTime = this.times.pressureLastTime ? moment(this.times.pressureLastSeconds).fromNow() : null;
+    this.times.co2LastTime = this.times.co2LastTime ? moment(this.times.co2LastSeconds).fromNow() : null;
+
   }
 
 }
@@ -66,4 +86,10 @@ class ThingyOverViewTimes {
   pressureLastTime: string;
   humidityLastTime: string;
   co2LastTime: string;
+
+  temperatureLastSeconds: number;
+  pressureLastSeconds: number;
+  humidityLastSeconds: number;
+  co2LastSeconds: number;
+
 }
