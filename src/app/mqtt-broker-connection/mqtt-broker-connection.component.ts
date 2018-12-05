@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ServerSocket} from '../service/server-socket';
-import {JSONProperty} from '../../../../backend/src/controllers/WebsocketController';
+import {JSONProperty} from '../../../../thingy-api-purple/src/controllers/WebsocketController';
 
 enum MqttConnectionState {
   Connected = "Connected",
