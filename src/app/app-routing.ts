@@ -6,11 +6,13 @@ import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import {ThingyDeviceComponent} from './thingy-device/thingy-device.component';
 import {StatisticsComponent} from './statistics/statistics.component';
+import {AlarmComponent} from './alarm/alarm.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'thingy', component: ThingyDeviceComponent},
   {path: 'statistics', component: StatisticsComponent},
+  {path: 'alarm', component: AlarmComponent},
   {path: '**', redirectTo: 'home'},
 ];
 

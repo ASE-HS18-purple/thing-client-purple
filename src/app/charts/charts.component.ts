@@ -72,7 +72,7 @@ export class ChartsComponent implements OnInit {
       options: {
         elements: {
           point: {
-            radius: 1,
+            radius: 0,
           }
         },
         title: {

@@ -28,6 +28,8 @@ import { DatetimePickerComponent } from './datetime-picker/datetime-picker.compo
 import { ChartsComponent } from './charts/charts.component';
 import { TrafficLightComponent } from './traffic-light/traffic-light.component';
 import { ThingyOverviewComponent } from './thingy-overview/thingy-overview.component';
+import { AlarmComponent } from './alarm/alarm.component';
+import { SetupAlarmComponent } from './alarm/setup-alarm/setup-alarm.component';
 
 
 @NgModule({
@@ -48,12 +50,15 @@ import { ThingyOverviewComponent } from './thingy-overview/thingy-overview.compo
     DatetimePickerComponent,
     ChartsComponent,
     ThingyOverviewComponent,
+    AlarmComponent,
+    SetupAlarmComponent,
   ],
   entryComponents: [
     SignUpComponent,
     LoginComponent,
     ConfigureThingyDeviceComponent,
-    EditThingyDeviceComponent
+    EditThingyDeviceComponent,
+    SetupAlarmComponent
   ],
   imports: [
     BrowserModule,
