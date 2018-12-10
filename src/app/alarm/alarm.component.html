@@ -27,8 +27,8 @@
       <td>{{alarm.triggerTimeFormatted}}</td>
       <td>
         <div [ngSwitch]="alarm.triggered">
-          <span *ngSwitchCase="true" class="badge badge-pill badge-primary">Yes</span>
-          <span *ngSwitchDefault class="badge badge-pill badge-secondary">No</span>
+          <span *ngSwitchCase="true" class="badge badge-pill badge-secondary">Yes</span>
+          <span *ngSwitchDefault class="badge badge-pill badge-primary">No</span>
         </div>
       </td>
       <td>

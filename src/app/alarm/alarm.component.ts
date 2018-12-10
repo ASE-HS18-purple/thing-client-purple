@@ -42,6 +42,9 @@ export class AlarmComponent implements OnInit {
 
   openSetupAlarm() {
     const setupAlarmCompModalReference = this.modalService.open(SetupAlarmComponent, {size: 'lg'});
+    setupAlarmCompModalReference.componentInstance.reloadData.subscribe(() => {
+      this.loadAlarms();
+    });
   }
 
 }
