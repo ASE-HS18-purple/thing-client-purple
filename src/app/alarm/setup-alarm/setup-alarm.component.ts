@@ -63,9 +63,6 @@ export class SetupAlarmComponent implements OnInit {
         const date = new Date();
         date.setHours(this.time.hour, this.time.minute, 0);
         alarm.triggerTime = date.getTime();
-        console.log(date);
-        console.log(this.time);
-        console.log(alarm);
         this.alarmService.setupAlarm(alarm).subscribe((alarmResponse: AlarmModel) => {
           this.activeModal.close('');
           this.reloadData.emit();

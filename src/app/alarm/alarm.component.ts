@@ -5,6 +5,8 @@ import {AlarmModel} from "../model/alarm.model";
 import {AlarmService} from "../service/alarm.service";
 import * as moment from 'moment';
 import {interval} from "rxjs";
+import {ServerSocket} from "../service/server-socket";
+import {AlarmEvent} from "../../../../thingy-api-purple/src/service/AlarmService";
 
 @Component({
   selector: 'app-alarm',
@@ -15,7 +17,10 @@ export class AlarmComponent implements OnInit {
 
   alarms: AlarmModel[] = [];
 
-  constructor(private modalService: NgbModal, private service: AlarmService) {
+  constructor(private modalService: NgbModal,
+              private service: AlarmService,
+              public serverSocket: ServerSocket) {
+    serverSocket.subject.subscribe({next: this.handleAlarmEvent.bind(this)});
   }
 
   ngOnInit() {
@@ -45,6 +50,17 @@ export class AlarmComponent implements OnInit {
     setupAlarmCompModalReference.componentInstance.reloadData.subscribe(() => {
       this.loadAlarms();
     });
+  }
+
+  handleAlarmEvent(data: any) {
+    if (data && data.alarmId) {
+      this.alarms.forEach((alarm: AlarmModel) => {
+        if (alarm.id === data.alarmId) {
+          alarm.isOn = true;
+          alarm.triggered = true;
+        }
+      });
+    }
   }
 
 }
