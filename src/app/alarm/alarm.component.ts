@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {SetupAlarmComponent} from "./setup-alarm/setup-alarm.component";
-import {AlarmModel} from "../model/alarm.model";
-import {AlarmService} from "../service/alarm.service";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {SetupAlarmComponent} from './setup-alarm/setup-alarm.component';
+import {AlarmModel} from '../model/alarm.model';
+import {AlarmService} from '../service/alarm.service';
 import * as moment from 'moment';
-import {interval} from "rxjs";
-import {ServerSocket} from "../service/server-socket";
-import {AlarmEvent} from "../../../../thingy-api-purple/src/service/AlarmService";
+import {interval} from 'rxjs';
+import {ServerSocket} from '../service/server-socket';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-alarm',
@@ -16,11 +16,14 @@ import {AlarmEvent} from "../../../../thingy-api-purple/src/service/AlarmService
 export class AlarmComponent implements OnInit {
 
   alarms: AlarmModel[] = [];
+  private notifier: NotifierService;
 
   constructor(private modalService: NgbModal,
               private service: AlarmService,
-              public serverSocket: ServerSocket) {
+              public serverSocket: ServerSocket,
+              private notService: NotifierService) {
     serverSocket.subject.subscribe({next: this.handleAlarmEvent.bind(this)});
+    this.notifier = notService;
   }
 
   ngOnInit() {
@@ -55,12 +58,13 @@ export class AlarmComponent implements OnInit {
   handleAlarmEvent(data: any) {
     if (data && data.alarmId) {
       this.alarms.forEach((alarm: AlarmModel) => {
-        if (alarm.id === data.alarmId) {
+        if (alarm.hasOwnProperty('id') && (alarm as any).id === data.alarmId) {
           alarm.isOn = true;
           alarm.triggered = true;
+          const message = moment(alarm.triggerTime).format('HH:mm') + ' Wake up!!';
+          this.notifier.notify('info', message);
         }
       });
     }
   }
-
 }

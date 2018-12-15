@@ -16,21 +16,66 @@ import {HomeComponent} from './home/home.component';
 import {AuthGuard} from './guard/auth.guard';
 import {JwtInterceptor} from './guard/JwtInterceptor';
 import {UnauthorizedRespInterceptor} from './guard/UnauthorizedRespInterceptor';
-import { MqttBrokerConnectionComponent } from './mqtt-broker-connection/mqtt-broker-connection.component';
+import {MqttBrokerConnectionComponent} from './mqtt-broker-connection/mqtt-broker-connection.component';
 import {MqttBrokerConnectionService} from './service/mqtt-broker-connection.service';
 import {ThingyDeviceService} from './service/thingy-device.service';
 import {ServerSocket} from './service/server-socket';
-import { ThingyDeviceComponent } from './thingy-device/thingy-device.component';
+import {ThingyDeviceComponent} from './thingy-device/thingy-device.component';
 import {ConfigureThingyDeviceComponent} from './thingy-device/configure-thingy-device/configure-thingy-device.component';
-import { EditThingyDeviceComponent } from './thingy-device/edit-thingy-device/edit-thingy-device.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { DatetimePickerComponent } from './datetime-picker/datetime-picker.component';
-import { ChartsComponent } from './charts/charts.component';
-import { TrafficLightComponent } from './traffic-light/traffic-light.component';
-import { ThingyOverviewComponent } from './thingy-overview/thingy-overview.component';
-import { AlarmComponent } from './alarm/alarm.component';
-import { SetupAlarmComponent } from './alarm/setup-alarm/setup-alarm.component';
+import {EditThingyDeviceComponent} from './thingy-device/edit-thingy-device/edit-thingy-device.component';
+import {StatisticsComponent} from './statistics/statistics.component';
+import {DatetimePickerComponent} from './datetime-picker/datetime-picker.component';
+import {ChartsComponent} from './charts/charts.component';
+import {TrafficLightComponent} from './traffic-light/traffic-light.component';
+import {ThingyOverviewComponent} from './thingy-overview/thingy-overview.component';
+import {AlarmComponent} from './alarm/alarm.component';
+import {SetupAlarmComponent} from './alarm/setup-alarm/setup-alarm.component';
+import {AlarmToastComponent} from './alarm/alarm-toast/alarm-toast.component';
+import {NotifierModule, NotifierOptions} from 'angular-notifier';
 
+/**
+ * Custom angular notifier options
+ */
+const customNotifierOptions: NotifierOptions = {
+  position: {
+    horizontal: {
+      position: 'right',
+      distance: 12
+    },
+    vertical: {
+      position: 'top',
+      distance: 12,
+      gap: 10
+    }
+  },
+  behaviour: {
+    autoHide: false,
+    onClick: false,
+    onMouseover: 'pauseAutoHide',
+    showDismissButton: false,
+    stacking: 50
+  },
+  theme: 'material',
+  animations: {
+    enabled: true,
+    show: {
+      preset: 'slide',
+      speed: 300,
+      easing: 'ease'
+    },
+    hide: {
+      preset: 'fade',
+      speed: 300,
+      easing: 'ease',
+      offset: 50
+    },
+    shift: {
+      speed: 300,
+      easing: 'ease'
+    },
+    overlap: 150
+  }
+};
 
 @NgModule({
   declarations: [
@@ -52,6 +97,7 @@ import { SetupAlarmComponent } from './alarm/setup-alarm/setup-alarm.component';
     ThingyOverviewComponent,
     AlarmComponent,
     SetupAlarmComponent,
+    AlarmToastComponent,
   ],
   entryComponents: [
     SignUpComponent,
@@ -66,7 +112,8 @@ import { SetupAlarmComponent } from './alarm/setup-alarm/setup-alarm.component';
     ReactiveFormsModule,
     AppRouting,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    NotifierModule.withConfig(customNotifierOptions),
   ],
   providers: [
     UserService,
