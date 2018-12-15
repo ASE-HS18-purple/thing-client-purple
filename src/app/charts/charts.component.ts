@@ -31,6 +31,7 @@ export class ChartsComponent implements OnInit {
   @Input() property: string;
 
   liveModeOn: boolean = false;
+  DURATION_SHOWN_IN_LIVE_UPDATE: number = 2 * 60 * 1000;
 
   constructor(public statisticsService: StatisticsService) {
   }
@@ -50,11 +51,11 @@ export class ChartsComponent implements OnInit {
   buildChart(label: string, chartId: string): Chart {
     let propertyValues: { x: Date, y: number }[] = [];
     const propertyData: { label: string, data: { x: Date, y: number }[], borderColor: string, fill: boolean }[] = [];
-    this.chartData.datasets.forEach(dataset => {
+    this.chartData.datasets.forEach((dataset, index) => {
       dataset.properties.forEach(value => {
         propertyValues.push({x: new Date(value.time), y: value.value});
       });
-      const color: string = this.generateRandomColor();
+      const color: string = this.generateRandomColor(index);
       propertyData.push({
         label: dataset.thingyName,
         data: propertyValues,
@@ -70,7 +71,11 @@ export class ChartsComponent implements OnInit {
       },
       showLine: true,
       options: {
+        animation: false,
         elements: {
+          line: {
+            cubicInterpolationMode: 'monotone',
+          },
           point: {
             radius: 0,
           }
@@ -93,11 +98,40 @@ export class ChartsComponent implements OnInit {
     });
   }
 
-  generateRandomColor() {
-    const redColor: number = Math.floor(Math.random() * 254) + 1;
-    const greenColor: number = Math.floor(Math.random() * 254) + 1;
-    const blueColor: number = Math.floor(Math.random() * 254) + 1;
-    const color: string = 'rgb(' + redColor + ',' + greenColor + ',' + blueColor + ')';
+  generateRandomColor(index: number) {
+    const channelValue: number = 100 + (Math.floor(index / 7) + 1) * 40;
+    const modeIndex: number = index % 7;
+    let redChannel = 0, greenChannel = 0, blueChannel = 0;
+    switch (modeIndex) {
+      case 0:
+        redChannel = channelValue;
+        break;
+      case 1:
+        greenChannel = channelValue;
+        break;
+      case 2:
+        blueChannel = channelValue;
+        break;
+      case 3:
+        blueChannel = channelValue;
+        redChannel = channelValue;
+        break;
+      case 4:
+        greenChannel = channelValue;
+        redChannel = channelValue;
+        break;
+      case 5:
+        blueChannel = channelValue;
+        greenChannel = channelValue;
+        break;
+      case 6:
+        blueChannel = channelValue;
+        greenChannel = channelValue;
+        redChannel = channelValue;
+        break;
+
+    }
+    const color: string = `rgb(${redChannel}, ${blueChannel}, ${greenChannel})`;
     return color;
   }
 
@@ -124,7 +158,6 @@ export class ChartsComponent implements OnInit {
         this.chart = this.buildChart(this.property, this.canvasId);
       });
   }
-
 
   getFromDate() {
     const fromDate = this.fromDate;
@@ -191,8 +224,7 @@ export class ChartsComponent implements OnInit {
             if (dataset.properties && dataset.properties[0]) {
               const oldestProperty = dataset.properties[0];
               const now = new Date().getTime();
-              const twoMinutesInMillis: number = 2 * 60 * 1000;
-              if (now - Number(oldestProperty.time) > twoMinutesInMillis) {
+              if (now - Number(oldestProperty.time) > this.DURATION_SHOWN_IN_LIVE_UPDATE) {
                 dataset.properties.splice(0, 1);
               }
             }
