@@ -37,14 +37,14 @@ export class DatetimePickerComponent implements OnInit {
     }
   }
 
-  handleDate($event) {
-    this.date = $event;
-    this.dateChanged.emit($event);
+  handleDate(event) {
+    this.date = event;
+    this.dateChanged.emit(event);
   }
 
-  handleTime($event) {
+  handleTime(event) {
     this.time = event;
-    this.timeChanged.emit($event);
+    this.timeChanged.emit(event);
   }
 
 }
