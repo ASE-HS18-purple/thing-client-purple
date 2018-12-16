@@ -7,7 +7,7 @@ import {Authenticate} from './authentication/authenticate';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private isLoggedIn: boolean;
+  isLoggedIn: boolean;
 
   constructor(private authService: Authenticate) {
     this.isLoggedIn = authService.isLoggedIn();

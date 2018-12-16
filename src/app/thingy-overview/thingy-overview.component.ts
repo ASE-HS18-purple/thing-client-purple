@@ -17,8 +17,8 @@ export class ThingyOverviewComponent implements OnInit {
 
   @Input() thingyDevice: ThingyDeviceModel;
 
-  private times: ThingyOverViewTimes;
-  private values: ThingyOverviewValues;
+  times: ThingyOverViewTimes;
+  values: ThingyOverviewValues;
 
   ngOnInit() {
     this.times = new ThingyOverViewTimes();

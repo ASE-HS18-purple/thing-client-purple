@@ -16,7 +16,7 @@ import {ThingyDataEvent} from "../../../../thingy-api-purple/src/service/ThingyN
 export class HomeComponent implements OnInit {
 
   private currentUser: AuthModel;
-  private thingyDevices: ThingyDeviceModel[];
+  thingyDevices: ThingyDeviceModel[];
 
   @ViewChildren(ThingyOverviewComponent) thingyOverviewComponents: QueryList<ThingyOverviewComponent>;
 

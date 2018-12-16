@@ -15,7 +15,7 @@ enum TrafficLightStatus {
 export class TrafficLightComponent implements OnInit {
 
   protected lastUpdate: number;
-  protected status: TrafficLightStatus;
+  status: TrafficLightStatus;
   protected nextTimeout;
   private times: Map<number, TrafficLightStatus>;
 
