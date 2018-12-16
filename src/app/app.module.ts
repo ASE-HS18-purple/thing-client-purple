@@ -28,6 +28,7 @@ import { DatetimePickerComponent } from './datetime-picker/datetime-picker.compo
 import { ChartsComponent } from './charts/charts.component';
 import { TrafficLightComponent } from './traffic-light/traffic-light.component';
 import { ThingyOverviewComponent } from './thingy-overview/thingy-overview.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -48,12 +49,14 @@ import { ThingyOverviewComponent } from './thingy-overview/thingy-overview.compo
     DatetimePickerComponent,
     ChartsComponent,
     ThingyOverviewComponent,
+    ProfileComponent,
   ],
   entryComponents: [
     SignUpComponent,
     LoginComponent,
     ConfigureThingyDeviceComponent,
-    EditThingyDeviceComponent
+    EditThingyDeviceComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
