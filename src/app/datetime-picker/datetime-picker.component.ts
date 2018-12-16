@@ -25,7 +25,7 @@ export class DatetimePickerComponent implements OnInit {
     if (this.initialDate) {
       this.date = {
         year: this.initialDate.getFullYear(),
-        month: this.initialDate.getMonth(),
+        month: this.initialDate.getMonth() + 1,
         day: this.initialDate.getDate()
       };
     }
