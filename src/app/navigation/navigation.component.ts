@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Authenticate} from '../authentication/authenticate';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ProfileComponent} from "../profile/profile.component";
 
 @Component({
   selector: 'app-navigation',
@@ -8,7 +10,7 @@ import {Authenticate} from '../authentication/authenticate';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(private auth: Authenticate) {
+  constructor(private auth: Authenticate, private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -17,6 +19,10 @@ export class NavigationComponent implements OnInit {
   performLogOut() {
     this.auth.logOut();
     window.location.replace('');
+  }
+
+  viewProfile() {
+    this.modalService.open(ProfileComponent, {size: 'lg'});
   }
 
 }
