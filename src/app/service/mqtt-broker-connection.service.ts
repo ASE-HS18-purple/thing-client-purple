@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class MqttBrokerConnectionService {
 
-  private basicURI = 'http://localhost:3000/mqtt/state';
+  private basicURI = 'http://212.47.239.128:8080/mqtt/state';
 
   constructor(private httpClient: HttpClient) {
   }

@@ -5,7 +5,7 @@ import {ThingyDeviceModel} from '../model/thingy-device.model';
 @Injectable()
 export class ThingyDeviceService {
 
-  basicURI = 'http://localhost:3000/thingy';
+  basicURI = 'http://212.47.239.128:8080/thingy';
 
   constructor(public httpClient: HttpClient) {
   }
