@@ -1,4 +1,4 @@
-import {JSONProperty} from "../../../../thingy-api-purple/src/controllers/WebsocketController";
+import {DataType} from "../../../../thingy-api-purple/src/controllers/WebsocketController";
 
 export class ThingyDeviceModel {
   name: string;
@@ -6,5 +6,5 @@ export class ThingyDeviceModel {
   id: string;
   location: string;
   lastValues: Map<number, number>;
-  lastTimes: Map<JSONProperty, number>;
+  lastTimes: Map<DataType, number>;
 }

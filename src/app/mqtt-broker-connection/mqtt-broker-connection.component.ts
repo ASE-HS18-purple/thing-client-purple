@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ServerSocket} from '../service/server-socket';
-import {JSONProperty} from '../../../../thingy-api-purple/src/controllers/WebsocketController';
+import {DataType} from '../../../../thingy-api-purple/src/controllers/WebsocketController';
 
 enum MqttConnectionState {
   Connected = "Connected",
@@ -29,7 +29,7 @@ export class MqttBrokerConnectionComponent implements OnInit {
   }
 
   setConnectionState(data: any) {
-    if (data.property == JSONProperty.Mqtt) {
+    if (data.property == DataType.Mqtt) {
       this.connectionState = data.mqttState;
     }
   }

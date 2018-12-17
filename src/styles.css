@@ -1,2 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
+@import "~angular-notifier/styles/core.css";
+@import "~angular-notifier/styles/themes/theme-material.css";
+@import "~angular-notifier/styles/types/type-info.css";

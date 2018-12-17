@@ -4,7 +4,7 @@ import {DatetimePickerComponent} from '../datetime-picker/datetime-picker.compon
 import {StatisticsService} from '../service/statistics.service';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import {Chart} from 'chart.js';
-import {JSONProperty} from '../../../../thingy-api-purple/src/controllers/WebsocketController';
+import {DataType} from "../../../../thingy-api-purple/src/controllers/WebsocketController";
 
 @Component({
   selector: 'app-charts',
@@ -77,7 +77,7 @@ export class ChartsComponent implements OnInit {
             cubicInterpolationMode: 'monotone',
           },
           point: {
-            radius: 1,
+            radius: 0,
           }
         },
         title: {
@@ -217,10 +217,10 @@ export class ChartsComponent implements OnInit {
   }
 
   liveUpdateOfChart(data: any) {
-    if (this.liveModeOn && data.thingyId) {
+    if (this.liveModeOn && data.thingy) {
       this.chartData.datasets.forEach(dataset => {
-        if (dataset.id === data.thingyId) {
-          if (data.property === JSONProperty[this.property]) {
+        if (dataset.id === data.thingy) {
+          if (data.property === DataType[this.property]) {
             if (dataset.properties && dataset.properties[0]) {
               const oldestProperty = dataset.properties[0];
               const now = new Date().getTime();
