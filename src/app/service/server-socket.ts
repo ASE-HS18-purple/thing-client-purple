@@ -11,7 +11,7 @@ export enum WebSocketState {
 @Injectable()
 export class ServerSocket {
 
-  websocketURL = 'ws://localhost:3000';
+  websocketURL = 'ws://212.47.239.128:8080';
   public subject: Subject<any>;
   private authenticate: Authenticate;
   private webSocket: WebSocket;

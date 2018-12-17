@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col">
+      <h3>Alarms</h3>
+    </div>
+    <div class="col"></div>
+    <div class="col">
+      <button class="btn btn-outline-primary float-right" (click)="openSetupAlarm()">
+        <i class="fa fa-clock-o"></i>
+        <span> Alarm setup</span>
+      </button>
+    </div>
+  </div>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Time</th>
+      <th>Triggered</th>
+      <th>On</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let alarm of alarms">
+      <td>{{alarm.name}}</td>
+      <td>{{alarm.triggerTimeFormatted}}</td>
+      <td>
+        <div [ngSwitch]="alarm.triggered">
+          <span *ngSwitchCase="true" class="badge badge-pill badge-secondary">Yes</span>
+          <span *ngSwitchDefault class="badge badge-pill badge-primary">No</span>
+        </div>
+      </td>
+      <td>
+        <div [ngSwitch]="alarm.isOn">
+          <span *ngSwitchCase="true" class="badge badge-pill badge-primary">Yes</span>
+          <span *ngSwitchDefault class="badge badge-pill badge-secondary">No</span>
+        </div>
+      </td>
+      <td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<notifier-container></notifier-container>
+

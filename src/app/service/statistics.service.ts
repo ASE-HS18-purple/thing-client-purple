@@ -9,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class StatisticsService {
 
-  private basicURI = 'http://localhost:3000/environmental-data';
+  private basicURI = 'http://212.47.239.128:8080/environmental-data';
 
   constructor(public httpClient: HttpClient) {
   }

@@ -5,7 +5,7 @@ import {UserModel} from '../model/user.model';
 @Injectable()
 export class UserService {
 
-  private baseURI = 'http://localhost:3000/users';
+  private baseURI = 'http://212.47.239.128:8080/users';
 
   constructor(private httpClient: HttpClient) {
   }

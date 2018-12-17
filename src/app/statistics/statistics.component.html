@@ -6,8 +6,9 @@
       <h3>Statistics</h3>
     </div>
   </div>
-  <app-charts property='Temperature' canvasId="temperatureChart" checkBoxId="temperatureCheckbox"></app-charts>
-  <app-charts property='Pressure' canvasId="pressureChart" checkBoxId="pressureCheckbox"></app-charts>
-  <app-charts property='Humidity' canvasId="humidityChart" checkBoxId="humidityCheckbox"></app-charts>
-  <app-charts property='Co2' canvasId="co2Chart" checkBoxId="co2Checkbox"></app-charts>
+  <hr/>
+  <app-charts property='{{temperature}}' canvasId="temperatureChart" checkBoxId="temperatureCheckbox"></app-charts>
+  <app-charts property='{{pressure}}' canvasId="pressureChart" checkBoxId="pressureCheckbox"></app-charts>
+  <app-charts property='{{humidity}}' canvasId="humidityChart" checkBoxId="humidityCheckbox"></app-charts>
+  <app-charts property='{{co2}}' canvasId="co2Chart" checkBoxId="co2Checkbox"></app-charts>
 </div>

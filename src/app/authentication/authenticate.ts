@@ -5,7 +5,7 @@ import {AuthModel} from '../model/auth.model';
 @Injectable()
 export class Authenticate {
 
-  private url = 'http://localhost:3000/authenticate';
+  private url = 'http://212.47.239.128:8080/authenticate';
   private currentUserLocalStorage = 'currentUser';
 
 

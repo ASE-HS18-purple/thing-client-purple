@@ -1,8 +1,12 @@
-<p>
-  Greate you are now logged in!
-</p>
-TOKEN = {{currentUser.token}}
-<br />
-User name = {{currentUser.user.name}}
-<br />
-Name = {{currentUser.user.username}}
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col">
+      <h3>Thingy Devices Overview</h3>
+    </div>
+  </div>
+</div>
+<hr>
+<div *ngFor="let thingyDevice of thingyDevices">
+  <app-thingy-overview [thingyDevice]="thingyDevice"></app-thingy-overview>
+</div>
