@@ -32,6 +32,7 @@ import {AlarmComponent} from './alarm/alarm.component';
 import {SetupAlarmComponent} from './alarm/setup-alarm/setup-alarm.component';
 import {AlarmToastComponent} from './alarm/alarm-toast/alarm-toast.component';
 import {NotifierModule, NotifierOptions} from 'angular-notifier';
+import { ProfileComponent } from './profile/profile.component';
 
 /**
  * Custom angular notifier options
@@ -98,6 +99,7 @@ const customNotifierOptions: NotifierOptions = {
     AlarmComponent,
     SetupAlarmComponent,
     AlarmToastComponent,
+    ProfileComponent,
   ],
   entryComponents: [
     SignUpComponent,
@@ -105,6 +107,8 @@ const customNotifierOptions: NotifierOptions = {
     ConfigureThingyDeviceComponent,
     EditThingyDeviceComponent,
     SetupAlarmComponent
+    EditThingyDeviceComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
