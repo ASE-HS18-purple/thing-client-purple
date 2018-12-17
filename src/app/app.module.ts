@@ -106,7 +106,7 @@ const customNotifierOptions: NotifierOptions = {
     LoginComponent,
     ConfigureThingyDeviceComponent,
     EditThingyDeviceComponent,
-    SetupAlarmComponent
+    SetupAlarmComponent,
     EditThingyDeviceComponent,
     ProfileComponent,
   ],
