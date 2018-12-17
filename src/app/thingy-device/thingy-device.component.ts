@@ -25,7 +25,7 @@ export class ThingyDeviceComponent implements OnInit, AfterViewInit {
   }
 
   updateThingyStatus(data) {
-    if (data.hasOwnProperty('thingyId')) {
+    if (data.hasOwnProperty('thingy')) {
       const theLight = this.trafficLights.get((<ThingyDataEvent>data).thingyId);
       if (theLight) {
         theLight.update();

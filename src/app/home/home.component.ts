@@ -38,9 +38,9 @@ export class HomeComponent implements OnInit {
   }
 
   updateThingyDevicesOverview(data: any) {
-    if (data && data.thingyId) {
+    if (data && data.thingy) {
       this.thingyOverviewComponents.forEach((component: ThingyOverviewComponent) => {
-        if (component.thingyDevice.id == data.thingyId) {
+        if (component.thingyDevice.id == data.thingy) {
           component.updateThingyOverview(data);
         }
       });

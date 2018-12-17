@@ -32,8 +32,19 @@ export class SetupAlarmComponent implements OnInit {
   }
 
   buildForm() {
+    const randomNames = [
+      "Walk the dog",
+      "Pet the cat",
+      "Fetch the pizza",
+      "Annoy someone",
+      "Washing machine done",
+      "Catch the train",
+      "Tea is ready",
+      "Well, here is another random name"
+    ];
+    let initialName = randomNames[Math.floor(Math.random() * randomNames.length)];
     this.form = this.formBuilder.group({
-      name: new FormControl('', [
+      name: new FormControl(initialName, [
         Validators.required,
         Validators.minLength(3),
       ]),
@@ -46,12 +57,15 @@ export class SetupAlarmComponent implements OnInit {
     const now = new Date();
     const hoursNow = now.getHours();
     const minutesNow = now.getMinutes();
-    validTime = (this.time.hour === hoursNow && this.time.minute > minutesNow) ||
+    const secondsNow = now.getSeconds();
+    validTime = (this.time.hour === hoursNow && this.time.minute === minutesNow && this.time.second > secondsNow) ||
+      (this.time.hour === hoursNow && this.time.minute > minutesNow) ||
       (this.time.hour > hoursNow);
     if (validTime) {
       Object.keys(this.form.controls).forEach(controlName => {
         const control = this.form.get(controlName);
         if (!control.valid) {
+
           validForm = false;
         }
       });

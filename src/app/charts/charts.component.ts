@@ -217,9 +217,9 @@ export class ChartsComponent implements OnInit {
   }
 
   liveUpdateOfChart(data: any) {
-    if (this.liveModeOn && data.thingyId) {
+    if (this.liveModeOn && data.thingy) {
       this.chartData.datasets.forEach(dataset => {
-        if (dataset.id === data.thingyId) {
+        if (dataset.id === data.thingy) {
           if (data.property === DataType[this.property]) {
             if (dataset.properties && dataset.properties[0]) {
               const oldestProperty = dataset.properties[0];
